@@ -59,7 +59,8 @@ namespace Randomizer
                     PLServer.Instance.AddNotification("You Must be host to use this command", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     return false;
                 }
-                Random.random(PLEncounterManager.Instance.PlayerShip,false);
+                Random.random(PLEncounterManager.Instance.PlayerShip,false, true);
+                
 
                 PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                 times++;
