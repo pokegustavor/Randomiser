@@ -13,8 +13,7 @@ namespace Randomizer
             if (PhotonNetwork.isMasterClient || previewStats)
             {
                 PLShipStats myStats = ship.MyStats;
-                EShipType shiptype = myStats.Ship.ShipTypeID;
-                List<PLShipComponent> AllShipComponents = myStats.AllComponents;
+                EShipType shiptype = myStats.Ship.ShipTypeID;              
                 int HullLv = 0;
                 int InertiaLv = 0;
                 int MainTLv = 0;
@@ -25,6 +24,7 @@ namespace Randomizer
                 int MisselLv = 0;
                 int TurretLv = 0;
                 int WarpLv = 0;
+                List<PLShipComponent> AllShipComponents = myStats.AllComponents;
                 if (ship.ShouldCreateDefaultComponents)
                 {
                     for (int i = AllShipComponents.Count - 1; i > -1; i--)

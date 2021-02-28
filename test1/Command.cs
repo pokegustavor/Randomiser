@@ -1,6 +1,5 @@
 ﻿using PulsarPluginLoader.Chat.Commands;
 using System.Collections.Generic;
-
 namespace Randomizer
 {
     class Command : IChatCommand
@@ -60,9 +59,9 @@ namespace Randomizer
                     return false;
                 }
                 Random.random(PLEncounterManager.Instance.PlayerShip,false, true);
+                PLServer.Instance.ChaosLevel += 0.5f;
                 
-
-                PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);              
                 times++;
             }
             else

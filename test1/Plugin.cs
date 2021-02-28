@@ -10,7 +10,7 @@ namespace Randomizer
             System.Random random = new System.Random();
             int oi = random.Next();
         }
-        public override string Version => "2.1";
+        public override string Version => "2.2";
 
         public override string Author => "pokegustavo";
 
