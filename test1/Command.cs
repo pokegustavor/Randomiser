@@ -74,17 +74,17 @@ namespace Randomizer
         {
             if (limit <= -1)
             {
-                return "Randomises your ship loadout";
+                return "Randomises your ship loadout(components level 1 and chaos+ 0.5)";
             }
             if (limit - times == 1)
             {
-                return $"Randomises your ship loadout, can only be used {1} more time!";
+                return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), can only be used {1} more time!";
             }
             else if (times == limit)
             {
-                return $"Randomises your ship loadout, but it can no longer be used (reset the limit or remove it)";
+                return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), but it can no longer be used (reset the limit or remove it)";
             }
-            return $"Randomises your ship loadout, can only be used {limit - times} more times";
+            return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), can only be used {limit - times} more times";
         }
         public string UsageExample()
         {
