@@ -18,6 +18,13 @@ namespace Randomizer
         }
         public bool Execute(string arguments, int SenderID)
         {
+
+            bool flag = !PhotonNetwork.isMasterClient;
+            if (flag)
+            {
+                PLServer.Instance.AddNotification("You Must be host to use this command", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                return false;
+            }
             if (string.IsNullOrEmpty(arguments))
             {
                 PLServer.Instance.AddNotification("Subcommands: Limit (value or off), roll", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
@@ -55,12 +62,6 @@ namespace Randomizer
             }
             else if ((times < limit || limit <= -1) && subcommand[0].ToLower() == "roll")
             {
-                bool flag = !PhotonNetwork.isMasterClient;
-                if (flag)
-                {
-                    PLServer.Instance.AddNotification("You Must be host to use this command", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
-                    return false;
-                }
                 Random.random(PLEncounterManager.Instance.PlayerShip,false, true);
                 PLServer.Instance.ChaosLevel += 0.5f;
                 
