@@ -287,4 +287,13 @@ namespace Randomizer
             Logger.Info("local");
         }
     }
+    [HarmonyPatch(typeof(PLWarpGuardian), "SetupShipStats")]
+    class GuardianPatch
+    {
+        static void Postfix(PLWarpGuardian __instance, bool previewStats)
+        {
+            Random.random(__instance, previewStats, false);
+            Logger.Info("local");
+        }
+    }
 }
