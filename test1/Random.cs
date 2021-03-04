@@ -160,19 +160,13 @@ namespace Randomizer
                     }
                     else if (shiptype == EShipType.E_CORRUPTED_DRONE)
                     {
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 5; i++)
                         {
                             myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret(), TurretLv, 0, 12), null), 17, ESlotType.E_COMP_TURRET);
-                            myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret2(), TurretLv, 0, 12), null), 18, ESlotType.E_COMP_TURRET);
-                            myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret3(), TurretLv, 0, 12), null), 18, ESlotType.E_COMP_TURRET);
-                            myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret4(), TurretLv, 0, 12), null), 18, ESlotType.E_COMP_TURRET);
+                            myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret2(), TurretLv, 0, 12), null), 50, ESlotType.E_COMP_TURRET);
+                            myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret3(), TurretLv, 0, 12), null), 51, ESlotType.E_COMP_TURRET);
+                            myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret4(), TurretLv, 0, 12), null), 52, ESlotType.E_COMP_TURRET);
                         }
-                    }
-                    else if (shiptype == EShipType.E_GUARDIAN)
-                    {
-                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret(), TurretLv, 0, 12), null), 17, ESlotType.E_COMP_TURRET);
-                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret2(), TurretLv, 0, 12), null), 18, ESlotType.E_COMP_TURRET);
-                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret2(), TurretLv, 0, 12), null), 18, ESlotType.E_COMP_TURRET);
                     }
                     else
                     {
@@ -227,17 +221,17 @@ namespace Randomizer
                         myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(20, Randomic.Missile(), MisselLv, 0, 12), null), 25, ESlotType.E_COMP_TRACKERMISSILE);
 
                     }
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, 0, 0, 0, 12), null), 31, ESlotType.E_COMP_CPU);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor(), 0, 0, 12), null), 31, ESlotType.E_COMP_CPU);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor2(), 0, 0, 12), null), 31, ESlotType.E_COMP_CPU);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor3(), 0, 0, 12), null), 31, ESlotType.E_COMP_CPU);                 
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program(), 0, 0, 12), null), 31, ESlotType.E_COMP_PROGRAM);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program2(), 0, 0, 12), null), 31, ESlotType.E_COMP_PROGRAM);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program3(), 0, 0, 12), null), 31, ESlotType.E_COMP_PROGRAM);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program4(), 0, 0, 12), null), 31, ESlotType.E_COMP_PROGRAM);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program5(), 0, 0, 12), null), 31, ESlotType.E_COMP_PROGRAM);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program6(), 0, 0, 12), null), 31, ESlotType.E_COMP_PROGRAM);
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(8, Randomic.O2(), 0, 0, 12), null), 31, ESlotType.E_COMP_O2);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, 0, 0, 0, 12), null), 32, ESlotType.E_COMP_CPU);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor(), 0, 0, 12), null), 33, ESlotType.E_COMP_CPU);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor2(), 0, 0, 12), null), 34, ESlotType.E_COMP_CPU);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor3(), 0, 0, 12), null), 35, ESlotType.E_COMP_CPU);                 
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program(), 0, 0, 12), null), 36, ESlotType.E_COMP_PROGRAM);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program2(), 0, 0, 12), null), 37, ESlotType.E_COMP_PROGRAM);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program3(), 0, 0, 12), null), 38, ESlotType.E_COMP_PROGRAM);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program4(), 0, 0, 12), null), 39, ESlotType.E_COMP_PROGRAM);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program5(), 0, 0, 12), null), 40, ESlotType.E_COMP_PROGRAM);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(17, Randomic.Program6(), 0, 0, 12), null), 41, ESlotType.E_COMP_PROGRAM);
+                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(8, Randomic.O2(), 0, 0, 12), null), 42, ESlotType.E_COMP_O2);
                     myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(26, Randomic.Maneuver(), ManuvLv, 0, 12), null), 24, ESlotType.E_COMP_MANEUVER_THRUSTER);
                     myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(11, Randomic.MainTurret(), MainTLv, 0, 12), null), 23, ESlotType.E_COMP_MAINTURRET);
                     myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(27, Randomic.Chair(), 0, 0, 12), null), 20, ESlotType.E_COMP_CAPTAINS_CHAIR);                  
