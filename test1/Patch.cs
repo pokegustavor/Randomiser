@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using PulsarPluginLoader.Utilities;
+using System.Reflection.Emit;
+using PulsarPluginLoader.Patches;
 
 namespace Randomizer
 {
@@ -294,6 +296,27 @@ namespace Randomizer
         {
             Random.random(__instance, previewStats, false);
             Logger.Info("local");
+        }
+    }
+    [HarmonyPatch(typeof(PLHull), MethodType.Constructor, new Type[] { typeof(EHullType), typeof(int) })]
+    class Patch
+    {
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
+        {
+            List<CodeInstruction> targetSequence = new List<CodeInstruction>
+            {
+                new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(PLHull),"m_Defense")),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldc_I4_M1),
+            };
+            List<CodeInstruction> patchSequence = new List<CodeInstruction>
+            {
+                new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(PLHull),"m_Defense")),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldc_I4, 0x61A8),
+
+            };
+            return HarmonyHelpers.PatchBySequence(Instructions, targetSequence, patchSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL, false);
         }
     }
 }
