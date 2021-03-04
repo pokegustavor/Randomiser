@@ -11,46 +11,49 @@ namespace Randomizer
         {
             return new string[]
             {
-                "roll",
+                "rd",
                 "random",
                 "randomizer"
             };
         }
         public bool Execute(string arguments, int SenderID)
         {
-            if (!string.IsNullOrEmpty(arguments))
+            if (string.IsNullOrEmpty(arguments))
             {
-                string[] subcommand = new string[2];
-                subcommand = arguments.Split(' ');
-                string command1 = subcommand[0].ToLower();
-                string command2 = subcommand[1];
-                int command3 = 0;
-                int.TryParse(subcommand[2], out command3);
+                PLServer.Instance.AddNotification("Subcommands: Limit (value or off), roll", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                return false;
+            }
+            string[] subcommand = new string[2] { "place","holder"};
+            subcommand = arguments.Split(' ');
+            if (subcommand[0].ToLower() != "roll")
+            {
 
-                if (command1 == "limit")
+                if (subcommand[0].ToLower() == "limit")
                 {
-                    if (command2 == "off")
+                    int value = 0;
+
+                    if (subcommand.Length > 1 && subcommand[1].ToLower() == "off")
                     {
                         limit = -1;
                         PLServer.Instance.AddNotification("Limit disabled!", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
                     }
-                    else if (command3 >= 1)
+                    else if (subcommand.Length > 1 && int.TryParse(subcommand[1],out value)) 
                     {
-                        limit = command3;
+                        limit = value;
                         times = 0;
-                        PLServer.Instance.AddNotification("New limit: " + command3, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
+                        PLServer.Instance.AddNotification("New limit: " + value, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
                     }
                     else
                     {
-                        PLServer.Instance.AddNotification("Invalid limit value (Must be 1 or higher)", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                        PLServer.Instance.AddNotification("Invalid limit value (Must be 1 or higher) or off", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     }
                 }
                 else
                 {
-                    PLServer.Instance.AddNotification("Invalid command", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                    PLServer.Instance.AddNotification("Invalid subcommand", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                 }
             }
-            if (times < limit || limit <= -1)
+            else if ((times < limit || limit <= -1) && subcommand[0].ToLower() == "roll")
             {
                 bool flag = !PhotonNetwork.isMasterClient;
                 if (flag)
@@ -64,9 +67,13 @@ namespace Randomizer
                 PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);              
                 times++;
             }
-            else
+            else if (times >= limit)
             {
                 PLServer.Instance.AddNotification("You can no longer use this command! Set a new limit or set limit to off for no limit", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 8000, false);
+            }
+            else
+            {
+                PLServer.Instance.AddNotification("wrong subcommand", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 8000, false);
             }
             return false;
         }
