@@ -32,8 +32,8 @@ namespace Randomizer
         public static int Hull()
         {
             System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EHullType)).Length - 2 );
-            if (value == 4)
+            int value = random.Next(0, Enum.GetValues(typeof(EHullType)).Length );
+            if (value == 4 || value == 15)
             {
                 value = 0;
             }

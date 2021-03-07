@@ -1,5 +1,7 @@
 ﻿using PulsarPluginLoader.Chat.Commands;
+using PulsarPluginLoader.Utilities;
 using System.Collections.Generic;
+
 namespace Randomizer
 {
     class Command : IChatCommand
@@ -18,63 +20,55 @@ namespace Randomizer
         }
         public bool Execute(string arguments, int SenderID)
         {
-
-            bool flag = !PhotonNetwork.isMasterClient;
-            if (flag)
+            if (!PhotonNetwork.isMasterClient)
             {
                 PLServer.Instance.AddNotification("You Must be host to use this command", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                 return false;
             }
-            if (string.IsNullOrEmpty(arguments))
+            string[] subcommand = arguments.Split(' ');
+            bool ArgConvertSuccess = false;
+            int CommandArg = 0;
+            if (subcommand.Length > 1)
             {
-                PLServer.Instance.AddNotification("Subcommands: Limit (value or off), roll", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
-                return false;
+                ArgConvertSuccess = int.TryParse(subcommand[1], out CommandArg);
             }
-            string[] subcommand = new string[2] { "place","holder"};
-            subcommand = arguments.Split(' ');
-            if (subcommand[0].ToLower() != "roll")
+            switch (subcommand[0].ToLower())
             {
-
-                if (subcommand[0].ToLower() == "limit")
-                {
-                    int value = 0;
-
-                    if (subcommand.Length > 1 && subcommand[1].ToLower() == "off")
+                default:
+                    PLServer.Instance.AddNotification("Subcommands: Limit (value or off), roll", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                    break;
+                case "roll":
+                    if ((times < limit || limit <= -1))
+                    {
+                        Random.random(PLEncounterManager.Instance.PlayerShip, false, true);
+                        PLServer.Instance.ChaosLevel += 0.5f;
+                        PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                        times++;
+                    }
+                    else
+                    {
+                        PLServer.Instance.AddNotification("You can no longer use this command! Set a new limit or set limit to off for no limit", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 8000, false);
+                    }
+                    break;
+                case "limit":
+                    
+                    if (ArgConvertSuccess)
+                    {
+                        limit = CommandArg;
+                        times = 0;
+                        PLServer.Instance.AddNotification("New limit: " + limit, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
+                    }
+                    else if (subcommand[1].ToLower() == "off")
                     {
                         limit = -1;
-                        PLServer.Instance.AddNotification("Limit disabled!", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
-                    }
-                    else if (subcommand.Length > 1 && int.TryParse(subcommand[1],out value)) 
-                    {
-                        limit = value;
-                        times = 0;
-                        PLServer.Instance.AddNotification("New limit: " + value, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
+                        Messaging.Notification("Limit disabled!", PLNetworkManager.Instance.LocalPlayer, default, 3000);
                     }
                     else
                     {
                         PLServer.Instance.AddNotification("Invalid limit value (Must be 1 or higher) or off", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     }
-                }
-                else
-                {
-                    PLServer.Instance.AddNotification("Invalid subcommand", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
-                }
-            }
-            else if ((times < limit || limit <= -1) && subcommand[0].ToLower() == "roll")
-            {
-                Random.random(PLEncounterManager.Instance.PlayerShip,false, true);
-                PLServer.Instance.ChaosLevel += 0.5f;
-                
-                PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);              
-                times++;
-            }
-            else if (times >= limit)
-            {
-                PLServer.Instance.AddNotification("You can no longer use this command! Set a new limit or set limit to off for no limit", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 8000, false);
-            }
-            else
-            {
-                PLServer.Instance.AddNotification("wrong subcommand", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 8000, false);
+
+                    break;
             }
             return false;
         }

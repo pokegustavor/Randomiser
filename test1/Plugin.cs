@@ -5,12 +5,7 @@ namespace Randomizer
 {
     public class Plugin : PulsarPlugin
     {
-        private void test()
-        {
-            System.Random random = new System.Random();
-            int oi = random.Next();
-        }
-        public override string Version => "2.3";
+        public override string Version => "3.0";
 
         public override string Author => "pokegustavo";
 
