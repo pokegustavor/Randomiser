@@ -172,7 +172,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Turret; i++)
                     {
-                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, (i + 1) * 24, TurretLv, 0, 12), null), -1, ESlotType.E_COMP_TURRET);
+                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret((i + 1) * 24), TurretLv, 0, 12), null), -1, ESlotType.E_COMP_TURRET);
                     }
                     for (int i = 0; i < Thrust; i++)
                     {
