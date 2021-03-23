@@ -8,7 +8,7 @@ namespace Randomizer
 {
     class Random
     {
-        static public void random(PLShipInfoBase ship, bool previewStats, bool Iscomand)
+        static public void random(PLShipInfoBase ship, bool previewStats, bool Iscomand = false)
         {
             if (PhotonNetwork.isMasterClient || previewStats)
             {

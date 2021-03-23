@@ -15,7 +15,7 @@ namespace Randomizer
     {
         static void Postfix(PLCarrierInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -24,7 +24,7 @@ namespace Randomizer
     {
         static void Postfix(PLIntrepidInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -33,7 +33,7 @@ namespace Randomizer
     {
         static void Postfix(PLCivilianStartingShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -42,7 +42,7 @@ namespace Randomizer
     {
         static void Postfix(PLCruiserInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -51,7 +51,7 @@ namespace Randomizer
     {
         static void Postfix(PLFluffyShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -60,7 +60,7 @@ namespace Randomizer
     {
         static void Postfix(PLOldWarsShip_Human __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -69,7 +69,7 @@ namespace Randomizer
     {
         static void Postfix(PLOutriderInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -78,7 +78,7 @@ namespace Randomizer
     {
         static void Postfix(PLRolandInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -87,7 +87,7 @@ namespace Randomizer
     {
         static void Postfix(PLWDDestroyerInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -96,7 +96,7 @@ namespace Randomizer
     {
         static void Postfix(PLWDAnnihilatorInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -105,7 +105,7 @@ namespace Randomizer
     {
         static void Postfix(PLStarGazerInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -114,7 +114,7 @@ namespace Randomizer
     {
         static void Postfix(PLOldWarsShip_Sylvassi __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -123,7 +123,7 @@ namespace Randomizer
     {
         static void Postfix(PLIntrepidCommanderInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -132,7 +132,7 @@ namespace Randomizer
     {
         static void Postfix(PLAlchemistShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -141,7 +141,7 @@ namespace Randomizer
     {
         static void Postfix(PLDeathseekerDrone __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -150,7 +150,7 @@ namespace Randomizer
     {
         static void Postfix(PLInfectedFighterInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -159,7 +159,7 @@ namespace Randomizer
     {
         static void Postfix(PLInfectedHeavyFighterInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -168,7 +168,7 @@ namespace Randomizer
     {
         static void Postfix(PLSwarmCommanderInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -177,7 +177,7 @@ namespace Randomizer
     {
         static void Postfix(PLTriCorpShockDrone __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -186,7 +186,7 @@ namespace Randomizer
     {
         static void Postfix(PLWDDroneInfo02 __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -195,7 +195,7 @@ namespace Randomizer
     {
         static void Postfix(PLWDDroneInfo03 __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -204,7 +204,7 @@ namespace Randomizer
     {
         static void Postfix(PLWDDroneInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -213,7 +213,7 @@ namespace Randomizer
     {
         static void Postfix(PLSwarmKeeperShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -222,7 +222,7 @@ namespace Randomizer
     {
         static void Postfix(PLRepairDroneInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -231,7 +231,7 @@ namespace Randomizer
     {
         static void Postfix(PLInfectedCarrier __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -240,7 +240,7 @@ namespace Randomizer
     {
         static void Postfix(PLFighterDroneInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -249,7 +249,7 @@ namespace Randomizer
     {
         static void Postfix(PLDeathseekerCommanderDrone __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -258,7 +258,7 @@ namespace Randomizer
     {
         static void Postfix(PLCorruptedDroneShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -267,7 +267,7 @@ namespace Randomizer
     {
         static void Postfix(PLCivilianFuelShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -276,7 +276,7 @@ namespace Randomizer
     {
         static void Postfix(PLBountyHunterShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -285,7 +285,7 @@ namespace Randomizer
     {
         static void Postfix(PLAcademyShipInfo __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
+            Random.random(__instance, previewStats);
             Logger.Info("local");
         }
     }
@@ -294,8 +294,8 @@ namespace Randomizer
     {
         static void Postfix(PLWarpGuardian __instance, bool previewStats)
         {
-            Random.random(__instance, previewStats, false);
-            Logger.Info("local");
+            Random.random(__instance, previewStats);
+            Logger.Info("local");           
         }
     }
     [HarmonyPatch(typeof(PLHull), MethodType.Constructor, new Type[] { typeof(EHullType), typeof(int) })]
@@ -316,7 +316,7 @@ namespace Randomizer
                 new CodeInstruction(OpCodes.Ldc_I4, 0x61A8),
 
             };
-            return HarmonyHelpers.PatchBySequence(Instructions, targetSequence, patchSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL, false);
+            return HarmonyHelpers.PatchBySequence(Instructions, targetSequence, patchSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL);
         }
     }
 }
