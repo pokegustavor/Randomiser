@@ -125,7 +125,7 @@ namespace Randomizer
                             myStats.RemoveShipComponent(AllShipComponents[i]);
                             warp++;
                         }
-                        else if(AllShipComponents[i].SlotType == ESlotType.E_COMP_CARGO || AllShipComponents[i].SlotType == ESlotType.E_COMP_HIDDENCARGO)
+                        else if((AllShipComponents[i].SlotType == ESlotType.E_COMP_CARGO || AllShipComponents[i].SlotType == ESlotType.E_COMP_HIDDENCARGO) && AllShipComponents[i].ActualSlotType != ESlotType.E_COMP_MISSION_COMPONENT)
                         {
                             myStats.RemoveShipComponent(AllShipComponents[i]);
                         }

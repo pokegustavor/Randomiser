@@ -29,136 +29,146 @@ namespace Randomizer
             int value = random.Next(10000, 32727);
             return value;
         }
-        public static int Hull()
+        public static int Hull(int seed = 1)
         {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EHullType)).Length );
-            if (value == 4 || value == 15)
-            {
-                value = 0;
-            }
-            return value;
-        }
-        public static int Shield()
-        {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EShieldGeneratorType)).Length);
-            if (value == 10)
-            {
-                value = 0;
-            }
-            return value;
-        }
-        public static int Reactor()
-        {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EReactorType)).Length);
-            if (value == 7)
-            {
-                value = 0;
-            }
-            return value;
-        }
-        public static int Jump()
-        {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EWarpDriveType)).Length);
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 14);
             if (value == 4)
             {
                 value = 0;
             }
             return value;
         }
-        public static int Thruster(int seed)
+        public static int Shield(int seed = 1)
         {
-            System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, Enum.GetValues(typeof(EThrusterType)).Length);
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 19);
+            if (value == 10)
+            {
+                value = 0;
+            }
             return value;
         }
-        public static int Inertia(int seed)
+        public static int Reactor(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, Enum.GetValues(typeof(EInertiaThrusterType)).Length);
+            int value = random.Next(0, 14);
+            if (value == 7)
+            {
+                value = 0;
+            }
+            return value;
+        }
+        public static int Jump(int seed = 1)
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 14);
+            if (value == 4)
+            {
+                value = 0;
+            }
+            return value;
+        }
+        public static int Thruster(int seed = 1)
+        {
+            System.Random random = new System.Random(Random4()*seed);
+            int value = random.Next(0, 4);
+            return value;
+        }
+        public static int Inertia(int seed = 1)
+        {
+            System.Random random = new System.Random(Random4()*seed);
+            int value = random.Next(0, 5);
             if(value == 1)
             {
                 value = 0;
             }
             return value;
         }
-        public static int Maneuver(int seed)
+        public static int Maneuver(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, Enum.GetValues(typeof(EManeuverThrusterType)).Length);
+            int value = random.Next(0, 2);
             return value;
         }
-        public static int Chair()
+        public static int Chair(int seed = 1)
         {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(ECaptainsChairType)).Length);
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 2);
             return value;
         }
-        public static int Extractor()
+        public static int Extractor(int seed = 1)
         {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EExtractorType)).Length);
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 4);
             if(value == 2)
             {
                 value = 0;
             }
             return value;
         }
-        public static int Turret(int seed)
+        public static int Turret(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, Enum.GetValues(typeof(ETurretType)).Length);
+            int value = random.Next(0, 18);
             if (value == 5)
             {
                 value = 7;
             }
             return value;
         }
-        public static int MainTurret()
+        public static int MainTurret(int seed = 1)
         {
-            System.Random random = new System.Random();
+            System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 6);
             return value;
         }
-        public static int Cloak()
+        public static int Cloak(int seed = 1)
         {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(ECloakingSystemType)).Length);
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 1);
             return value;
         }
 
-        public static int Missile(int seed)
+        public static int Missile(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, Enum.GetValues(typeof(ETrackerMissileType)).Length);
+            int value = random.Next(0, 9);
             if (value == 3)
             {
                 value = 0;
             }
             return value;
         }
-        public static int O2()
+        public static int O2(int seed = 1)
         {
-            System.Random random = new System.Random();
-            int value = random.Next(0, Enum.GetValues(typeof(EO2GeneratorType)).Length);           
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 1);           
             return value;
         }
-        public static int Processor(int seed)
+        public static int Processor(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(1, Enum.GetValues(typeof(ECPUClass)).Length);
+            int value = random.Next(1, 29);
             return value;
         }
-        public static int Program(int seed)
+        public static int Program(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, Enum.GetValues(typeof(EWarpDriveProgramType)).Length);
+            int value = random.Next(0, 35);
             if (value == 8)
             {
                 value = 18;
+            }
+            return value;
+        }
+        public static int Nuclear(int seed = 1)
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 6);
+            if (value == 3)
+            {
+                value = 0;
             }
             return value;
         }
