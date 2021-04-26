@@ -39,6 +39,7 @@ namespace Randomizer
                 int CPU = 0;
                 int Program = 0;
                 int warp = 0;
+                int Polytech = 0;
                 List<PLShipComponent> AllShipComponents = myStats.AllComponents;
                 if (ship.ShouldCreateDefaultComponents)
                 {
@@ -125,7 +126,7 @@ namespace Randomizer
                             myStats.RemoveShipComponent(AllShipComponents[i]);
                             warp++;
                         }
-                        else if((AllShipComponents[i].SlotType == ESlotType.E_COMP_CARGO || AllShipComponents[i].SlotType == ESlotType.E_COMP_HIDDENCARGO) && AllShipComponents[i].ActualSlotType != ESlotType.E_COMP_MISSION_COMPONENT)
+                        else if((AllShipComponents[i].SlotType == ESlotType.E_COMP_CARGO || AllShipComponents[i].SlotType == ESlotType.E_COMP_HIDDENCARGO) && AllShipComponents[i].ActualSlotType != ESlotType.E_COMP_MISSION_COMPONENT && AllShipComponents[i].ActualSlotType != ESlotType.E_COMP_POLYTECH_MODULE)
                         {
                             myStats.RemoveShipComponent(AllShipComponents[i]);
                         }
@@ -138,6 +139,11 @@ namespace Randomizer
                         {
                             myStats.RemoveShipComponent(AllShipComponents[i]);
                             Program++;
+                        }
+                        else if (AllShipComponents[i].SlotType == ESlotType.E_COMP_POLYTECH_MODULE)
+                        {
+                            myStats.RemoveShipComponent(AllShipComponents[i]);
+                            Polytech++;
                         }
                         if (Iscomand)
                         {
@@ -153,7 +159,10 @@ namespace Randomizer
                             WarpLv = 0;
                         }
                     }
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(8, Randomic.O2(), 0, 0, 12), null), -1, ESlotType.E_COMP_O2);
+                    if(shiptype != EShipType.E_POLYTECH_SHIP)
+                    {
+                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(8, Randomic.O2(), 0, 0, 12), null), -1, ESlotType.E_COMP_O2);
+                    }                  
                     for (int i = 0; i < Hull; i++)
                     {
                         myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(6, Randomic.Hull(), HullLv, 0, 12), null), -1, ESlotType.E_COMP_HULL);
@@ -214,6 +223,10 @@ namespace Randomizer
                     for (int i = 0; i < warp; i++)
                     {
                         myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(2, Randomic.Jump(), WarpLv, 0, 12), null), -1, ESlotType.E_COMP_WARP);
+                    }
+                    for (int i = 0; i < Polytech; i++)
+                    {
+                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(34, Randomic.Polytech(i), 0, 0, 12), null), -1, ESlotType.E_COMP_CARGO);
                     }
                 }
             }

@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using PulsarPluginLoader.Utilities;
-using System.Reflection.Emit;
-using PulsarPluginLoader.Patches;
+
 
 namespace Randomizer
 {
@@ -298,25 +297,31 @@ namespace Randomizer
             Logger.Info("local");           
         }
     }
-    [HarmonyPatch(typeof(PLHull), MethodType.Constructor, new Type[] { typeof(EHullType), typeof(int) })]
-    class Patch
+    [HarmonyPatch(typeof(PLPolytechShipInfo), "SetupShipStats")]
+    class PolytechPatch
     {
-        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
+        static void Postfix(PLPolytechShipInfo __instance, bool previewStats)
         {
-            List<CodeInstruction> targetSequence = new List<CodeInstruction>
-            {
-                new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(PLHull),"m_Defense")),
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldc_I4_M1),
-            };
-            List<CodeInstruction> patchSequence = new List<CodeInstruction>
-            {
-                new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(PLHull),"m_Defense")),
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldc_I4, 0x61A8),
-
-            };
-            return HarmonyHelpers.PatchBySequence(Instructions, targetSequence, patchSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL);
+            Random.random(__instance, previewStats);
+            Logger.Info("local");
         }
     }
+    [HarmonyPatch(typeof(PLPTDrone), "SetupShipStats")]
+    class PTDronePatch
+    {
+        static void Postfix(PLPTDrone __instance, bool previewStats)
+        {
+            Random.random(__instance, previewStats);
+            Logger.Info("local");
+        }
+    }
+    [HarmonyPatch(typeof(PLUnseenFighterShipInfo), "SetupShipStats")]
+    class UnseenFighterPatch
+    {
+        static void Postfix(PLUnseenFighterShipInfo __instance, bool previewStats)
+        {
+            Random.random(__instance, previewStats);
+            Logger.Info("local");
+        }
+    }    
 }

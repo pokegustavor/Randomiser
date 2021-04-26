@@ -32,8 +32,8 @@ namespace Randomizer
         public static int Hull(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 14);
-            if (value == 4)
+            int value = random.Next(0, 16);
+            if (value == 4 || value == 15)
             {
                 value = 0;
             }
@@ -42,7 +42,7 @@ namespace Randomizer
         public static int Shield(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 19);
+            int value = random.Next(0, 20);
             if (value == 10)
             {
                 value = 0;
@@ -52,7 +52,7 @@ namespace Randomizer
         public static int Reactor(int seed = 1)
         {
             System.Random random = new System.Random(Random4()*seed);
-            int value = random.Next(0, 14);
+            int value = random.Next(0, 15);
             if (value == 7)
             {
                 value = 0;
@@ -100,7 +100,7 @@ namespace Randomizer
         public static int Extractor(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 4);
+            int value = random.Next(0, 5);
             if(value == 2)
             {
                 value = 0;
@@ -170,6 +170,12 @@ namespace Randomizer
             {
                 value = 0;
             }
+            return value;
+        }
+        public static int Polytech(int seed = 1)
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 5);           
             return value;
         }
     }
