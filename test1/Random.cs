@@ -10,7 +10,7 @@ namespace Randomizer
     {
         static public void random(PLShipInfoBase ship, bool previewStats, bool Iscomand = false)
         {
-            if (PhotonNetwork.isMasterClient || previewStats)
+            if (PhotonNetwork.isMasterClient || (previewStats && ship.ShouldCreateDefaultComponents))
             {
                 PLShipStats myStats = ship.MyStats;
                 EShipType shiptype = myStats.Ship.ShipTypeID;              
@@ -40,10 +40,7 @@ namespace Randomizer
                 int Program = 0;
                 int warp = 0;
                 int Polytech = 0;
-                List<PLShipComponent> AllShipComponents = myStats.AllComponents;
-                if (ship.ShouldCreateDefaultComponents)
-                {
-                    
+                List<PLShipComponent> AllShipComponents = myStats.AllComponents;                 
                     for (int i = AllShipComponents.Count - 1; i > -1; i--)
                     {
                         if (AllShipComponents[i].SlotType == ESlotType.E_COMP_CAPTAINS_CHAIR)
@@ -227,8 +224,7 @@ namespace Randomizer
                     for (int i = 0; i < Polytech; i++)
                     {
                         myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(34, Randomic.Polytech(i), 0, 0, 12), null), -1, ESlotType.E_COMP_CARGO);
-                    }
-                }
+                    }                
             }
         }
 
