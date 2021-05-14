@@ -178,6 +178,7 @@ namespace Randomizer
             int value = random.Next(0, 5);           
             return value;
         }
+
     }
     
 }

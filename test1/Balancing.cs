@@ -36,9 +36,10 @@ namespace Randomizer
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
         {
             List<CodeInstruction> instructionsList = Instructions.ToList();
-            instructionsList[173].operand = 0x3A98;
+            instructionsList[173].operand = 0xAFC8;
             instructionsList[199].operand = 0xDAC;
-            instructionsList[303].operand = 0x2710;
+            instructionsList[274].operand = 0x13880;
+            instructionsList[303].operand = 0x9470;
             return instructionsList.AsEnumerable();
         }
     }
@@ -48,7 +49,7 @@ namespace Randomizer
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
         {
             List<CodeInstruction> instructionsList = Instructions.ToList();
-            instructionsList[272].operand = 0x11170;
+            instructionsList[272].operand = 0x249F0;
             instructionsList[194].operand = 0x4650;
             return instructionsList.AsEnumerable();
         }
@@ -59,7 +60,9 @@ namespace Randomizer
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
         {
             List<CodeInstruction> instructionsList = Instructions.ToList();
-            instructionsList[15].operand = 0x4E20;
+            instructionsList[15].operand = 0xC350;
+            instructionsList[19].operand = 10000f;
+            instructionsList[25].operand = 26f;
             return instructionsList.AsEnumerable();
         }
     }
@@ -79,8 +82,8 @@ namespace Randomizer
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
         {
             List<CodeInstruction> instructionsList = Instructions.ToList();
-            instructionsList[89].operand = 0x3A98;
-            instructionsList[66].operand = 0x4650;
+            instructionsList[89].operand = 0x7530;
+            instructionsList[66].operand = 0x88B8;
             return instructionsList.AsEnumerable();
         }
     }

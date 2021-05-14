@@ -5,7 +5,7 @@ namespace Randomizer
 {
     public class Plugin : PulsarPlugin
     {
-        public override string Version => "4.1";
+        public override string Version => "4.2";
 
         public override string Author => "pokegustavo";
 
