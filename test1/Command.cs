@@ -8,6 +8,8 @@ namespace Randomizer
     {
         int times = 3;
         int limit = -1;
+        public static bool level = false;
+        public static bool shouldlevel = true;
 
         public string[] CommandAliases()
         {
@@ -68,6 +70,22 @@ namespace Randomizer
                         PLServer.Instance.AddNotification("Invalid limit value (Must be 1 or higher) or off", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     }
 
+                    break;
+                case "level":
+                    level = !level;
+                    foreach(PLShipComponent component in PLEncounterManager.Instance.PlayerShip.MyStats.AllComponents)
+                    {
+                        if(component.Level > 9)
+                        {
+                            shouldlevel = false;
+                        }
+                    }
+                    if (shouldlevel)
+                    {
+                        Random.randomlevel(PLEncounterManager.Instance.PlayerShip);
+                    }
+                    shouldlevel = false;
+                    Messaging.Notification("Random Levels " + (level ? "enabled":"disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
                     break;
             }
             return false;

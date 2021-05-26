@@ -178,6 +178,12 @@ namespace Randomizer
             int value = random.Next(0, 5);           
             return value;
         }
+        public static int Level(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 31);
+            return value;
+        }
 
     }
     
