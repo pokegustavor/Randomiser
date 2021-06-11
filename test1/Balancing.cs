@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HarmonyLib;
 using System.Reflection.Emit;
 using PulsarPluginLoader.Patches;
@@ -84,6 +82,18 @@ namespace Randomizer
             List<CodeInstruction> instructionsList = Instructions.ToList();
             instructionsList[89].operand = 0x7530;
             instructionsList[66].operand = 0x88B8;
+            return instructionsList.AsEnumerable();
+        }
+    }
+    [HarmonyPatch(typeof(PLCorruptedLaserTurret), MethodType.Constructor, new Type[] { typeof(int), typeof(int) })]
+    class AncientLaserPatch
+    {
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
+        {
+            List<CodeInstruction> instructionsList = Instructions.ToList();
+            instructionsList[11].operand = 600f;
+            instructionsList[14].operand = 15f;
+            instructionsList[20].operand = 12000f;
             return instructionsList.AsEnumerable();
         }
     }

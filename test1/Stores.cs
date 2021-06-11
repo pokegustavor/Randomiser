@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HarmonyLib;
-using PulsarPluginLoader.Utilities;
+﻿using HarmonyLib;
 using UnityEngine;
 
 namespace Randomizer
@@ -14,14 +8,12 @@ namespace Randomizer
     {
         static PLShipComponent Postfix(PLShipComponent __result)
         {
-			int num = UnityEngine.Random.Range(0, 5000000);
-			int num2 = 25;
-			int num3 = num % num2;
+			int num = UnityEngine.Random.Range(0, 5000000) % 25;
 			PLShipComponent plshipComponent = null;
 			float inRarity = 4f;
 			int seed = UnityEngine.Random.Range(0, 50000000);
 			PLRand plrand = new PLRand(seed);
-			switch (num3)
+			switch (num)
 			{
 				case 0:
 				case 1:
@@ -82,6 +74,10 @@ namespace Randomizer
 					break;
 			}
 			plshipComponent.Level += Mathf.RoundToInt((PLServer.Instance != null) ? (PLServer.Instance.ChaosLevel * 0.2f) : 0f);
+            if (Command.level)
+			{
+				plshipComponent.Level = Randomic.Level(plrand.Next(), plshipComponent.ActualSlotType);
+			}
 			__result = plshipComponent;
 			return __result;
 		}

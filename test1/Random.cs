@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Randomizer
 {
@@ -10,7 +6,7 @@ namespace Randomizer
     {
         static public void random(PLShipInfoBase ship, bool previewStats, bool Iscomand = false)
         {
-            if (PhotonNetwork.isMasterClient || (previewStats && ship.ShouldCreateDefaultComponents))
+            if ((PhotonNetwork.isMasterClient || (previewStats && ship.ShouldCreateDefaultComponents)) && PLServer.Instance != null)
             {
                 PLShipStats myStats = ship.MyStats;
                 EShipType shiptype = myStats.Ship.ShipTypeID;              
@@ -278,7 +274,7 @@ namespace Randomizer
         {
             foreach(PLShipComponent component in ship.MyStats.AllComponents)
             {
-                component.Level = Randomic.Level(component.GetHashCode());                
+                component.Level = Randomic.Level(component.GetHashCode(), component.ActualSlotType);                
             }
             PLServer.Instance.ServerRepairHull(ship.ShipID, 500000, 0);
 

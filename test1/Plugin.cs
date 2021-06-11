@@ -1,15 +1,10 @@
 ﻿using PulsarPluginLoader;
-using System;
-using System.Collections;
-using System.IO;
-using PulsarPluginLoader.Utilities;
-using UnityEngine;
 
 namespace Randomizer
 {
     public class Plugin : PulsarPlugin
     {
-        public override string Version => "5.0";
+        public override string Version => "5.1";
 
         public override string Author => "pokegustavo";
 

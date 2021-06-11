@@ -1,6 +1,5 @@
 ﻿using PulsarPluginLoader.Chat.Commands;
 using PulsarPluginLoader.Utilities;
-using System.Collections.Generic;
 
 namespace Randomizer
 {

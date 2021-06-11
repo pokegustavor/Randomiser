@@ -1,7 +1,4 @@
-﻿using System;
-using HarmonyLib;
-
-namespace Randomizer
+﻿namespace Randomizer
 {
     class Randomic
     {
@@ -178,12 +175,13 @@ namespace Randomizer
             int value = random.Next(0, 5);           
             return value;
         }
-        public static int Level(int seed = 1) 
+        public static int Level(int seed = 1, ESlotType type = ESlotType.E_COMP_ID_MAX) 
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 31);
+            int value = type == ESlotType.E_COMP_WARP ? random.Next(0,9) : random.Next(0, 31);
             return value;
         }
+        
 
     }
     
