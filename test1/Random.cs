@@ -6,7 +6,7 @@ namespace Randomizer
     {
         static public void random(PLShipInfoBase ship, bool previewStats, bool Iscomand = false)
         {
-            if ((PhotonNetwork.isMasterClient || (previewStats && ship.ShouldCreateDefaultComponents)) && PLServer.Instance != null)
+            if (((PhotonNetwork.isMasterClient && ship.ShouldCreateDefaultComponents || (previewStats && ship.ShouldCreateDefaultComponents)) && PLServer.Instance != null) || Iscomand )
             {
                 PLShipStats myStats = ship.MyStats;
                 EShipType shiptype = myStats.Ship.ShipTypeID;              
@@ -50,7 +50,7 @@ namespace Randomizer
                         myStats.RemoveShipComponent(AllShipComponents[i]);
                         Cloak++;
                     }
-                    else if (AllShipComponents[i].SlotType == ESlotType.E_COMP_HULL && shiptype != EShipType.E_GUARDIAN)
+                    else if (AllShipComponents[i].SlotType == ESlotType.E_COMP_HULL && (shiptype != EShipType.E_GUARDIAN && shiptype != EShipType.E_DEATHSEEKER_DRONE_SC && shiptype != EShipType.E_CORRUPTED_DRONE && shiptype != EShipType.E_SWARM_CMDR))
                     {
                         HullLv = AllShipComponents[i].Level;
                         myStats.RemoveShipComponent(AllShipComponents[i]);
@@ -161,7 +161,7 @@ namespace Randomizer
                     }                  
                     for (int i = 0; i < Hull; i++)
                     {
-                        if(Command.level && !Iscomand) 
+                        if(Configs.level && !Iscomand) 
                         {
                         HullLv = Randomic.Level(i + ship.ShipID);
                         }
@@ -169,7 +169,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Shld; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         ShildLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -185,7 +185,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Turret; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         TurretLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -193,7 +193,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Thrust; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         ThrustLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -201,7 +201,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Inertias; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         InertiaLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -209,7 +209,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Missel; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         MisselLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -218,7 +218,7 @@ namespace Randomizer
                     myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, 0, 0, 0, 12), null), -1, ESlotType.E_COMP_CPU);
                     for (int i = 0; i < CPU - 1; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         CPULv = Randomic.Level(i + ship.ShipID);
                     }
@@ -230,7 +230,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Manuv; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         ManuvLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -238,7 +238,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < MainT; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         MainTLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -250,7 +250,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < reactor; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         ReactorLv = Randomic.Level(i + ship.ShipID);
                     }
@@ -258,7 +258,7 @@ namespace Randomizer
                     }
                     for (int i = 0; i < warp; i++)
                     {
-                    if (Command.level && !Iscomand)
+                    if (Configs.level && !Iscomand)
                     {
                         WarpLv = Randomic.Level(i + ship.ShipID);
                     }

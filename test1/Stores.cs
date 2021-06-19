@@ -74,7 +74,7 @@ namespace Randomizer
 					break;
 			}
 			plshipComponent.Level += Mathf.RoundToInt((PLServer.Instance != null) ? (PLServer.Instance.ChaosLevel * 0.2f) : 0f);
-            if (Command.level)
+            if (Configs.level)
 			{
 				plshipComponent.Level = Randomic.Level(plrand.Next(), plshipComponent.ActualSlotType);
 			}

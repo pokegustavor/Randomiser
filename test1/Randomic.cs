@@ -34,6 +34,10 @@
             {
                 value = 0;
             }
+            if (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13)) 
+            {
+                value += 8;             
+            }
             return value;
         }
         public static int Shield(int seed = 1)
@@ -53,6 +57,10 @@
             if (value == 7)
             {
                 value = 0;
+            }
+            if (!Configs.bossitem && (value == 9 || value == 15))
+            {
+                value += 1;
             }
             return value;
         }
@@ -79,6 +87,10 @@
             if(value == 1)
             {
                 value = 0;
+            }
+            if (!Configs.bossitem && (value == 2 || value == 3))
+            {
+                value += 2;
             }
             return value;
         }
@@ -112,6 +124,10 @@
             {
                 value = 7;
             }
+            if (!Configs.bossitem && (value == 7 || value == 8 || value == 18))
+            {
+                value += 2;
+            }
             return value;
         }
         public static int MainTurret(int seed = 1)
@@ -134,6 +150,10 @@
             if (value == 3)
             {
                 value = 0;
+            }
+            if (!Configs.bossitem && (value == 5))
+            {
+                value += 1;
             }
             return value;
         }

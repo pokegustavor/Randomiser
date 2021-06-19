@@ -5,11 +5,6 @@ namespace Randomizer
 {
     class Command : IChatCommand
     {
-        int times = 3;
-        int limit = -1;
-        public static bool level = false;
-        public static bool shouldlevel = true;
-
         public string[] CommandAliases()
         {
             return new string[]
@@ -36,15 +31,15 @@ namespace Randomizer
             switch (subcommand[0].ToLower())
             {
                 default:
-                    PLServer.Instance.AddNotification("Subcommands: Limit (value or off), roll", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                    PLServer.Instance.AddNotification("Subcommands: roll, (limit + (value or off), level, vannila", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     break;
                 case "roll":
-                    if ((times < limit || limit <= -1))
+                    if ((Configs.times < Configs.limit || Configs.limit <= -1))
                     {
                         Random.random(PLEncounterManager.Instance.PlayerShip, false, true);
                         PLServer.Instance.ChaosLevel += 0.5f;
                         PLServer.Instance.AddNotification("Items Randomised", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
-                        times++;
+                        Configs.times++;
                     }
                     else
                     {
@@ -55,14 +50,14 @@ namespace Randomizer
                     
                     if (ArgConvertSuccess)
                     {
-                        limit = CommandArg;
-                        times = 0;
-                        PLServer.Instance.AddNotification("New limit: " + limit, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
+                        Configs.limit = CommandArg;
+                        Configs.times = 0;
+                        PLServer.Instance.AddNotification("New limit: " + Configs.limit, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
                     }
                     else if (subcommand[1].ToLower() == "off")
                     {
-                        limit = -1;
-                        Messaging.Notification("Limit disabled!", PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                        Configs.limit = -1;
+                        Messaging.Notification("limit disabled!", PLNetworkManager.Instance.LocalPlayer, default, 3000);
                     }
                     else
                     {
@@ -71,43 +66,42 @@ namespace Randomizer
 
                     break;
                 case "level":
-                    level = !level;
-                    foreach(PLShipComponent component in PLEncounterManager.Instance.PlayerShip.MyStats.AllComponents)
+                case "lv":
+                    Configs.level = !Configs.level;
+                    if (Configs.shouldlevel && Configs.level)
                     {
-                        if(component.Level > 9)
-                        {
-                            shouldlevel = false;
-                        }
+                        Random.randomlevel(PLEncounterManager.Instance.PlayerShip);                       
                     }
-                    if (shouldlevel)
-                    {
-                        Random.randomlevel(PLEncounterManager.Instance.PlayerShip);
-                    }
-                    shouldlevel = false;
-                    Messaging.Notification("Random Levels " + (level ? "enabled":"disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                    Configs.shouldlevel = false;
+                    Messaging.Notification("Random Levels " + (Configs.level ? "enabled":"disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                    break;
+                case "vannila":
+                case "vn":
+                    Configs.bossitem = !Configs.bossitem;
+                    Messaging.Notification("Not obtanable items " + (Configs.bossitem ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
                     break;
             }
             return false;
         }
         public string Description()
         {
-            if (limit <= -1)
+            if (Configs.limit <= -1)
             {
                 return "Randomises your ship loadout(components level 1 and chaos+ 0.5)";
             }
-            if (limit - times == 1)
+            if (Configs.limit - Configs.times == 1)
             {
                 return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), can only be used {1} more time!";
             }
-            else if (times == limit)
+            else if (Configs.times == Configs.limit)
             {
                 return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), but it can no longer be used (reset the limit or remove it)";
             }
-            return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), can only be used {limit - times} more times";
+            return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), can only be used {Configs.limit - Configs.times} more Configs.times";
         }
         public string UsageExample()
         {
-            return "/" + this.CommandAliases()[0] + " (Limit + (value or off)";
+            return "/" + this.CommandAliases()[0] + " roll, (limit + (value or off), level, vannila";
         }
         public bool PublicCommand()
         {
