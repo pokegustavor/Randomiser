@@ -80,8 +80,106 @@ namespace Randomizer
 			}
 			__result = plshipComponent;
 			return __result;
+		}		
+	}
+	[HarmonyPatch(typeof(PLPawnItem),"CreateRandom")]
+	class Item_store 
+	{ 
+	  static PLWare Postfix(PLWare __result) 
+		{
+			int num = UnityEngine.Random.Range(0, 30);
+			PLRand plrand = new PLRand(UnityEngine.Random.Range(0, 50000));
+			float inRarity = 7f - Mathf.Clamp(PLServer.Instance.ChaosLevel, 0f, 6f);
+			PLWare plware;
+			switch (num)
+			{
+				case 0:
+					plware = new PLPawnItem_BurstPistol();
+					break;
+				case 1:
+					plware = new PLPawnItem_FireGun();
+					break;
+				case 2:
+					plware = new PLPawnItem_PhasePistol();
+					break;
+				case 3:
+					plware = new PLPawnItem_Ranger();
+					break;
+				case 4:
+					plware = new PLPawnItem_RepairGun();
+					break;
+				case 5:
+					plware = new PLPawnItem_PierceLaserPistol();
+					break;
+				case 6:
+					plware = new PLPawnItem_SmugglersPistol();
+					break;
+				case 7:
+					plware = new PLPawnItem_Scanner();
+					break;
+				case 8:
+					plware = new PLPawnItem_HandShotgun();
+					break;
+				case 9:					
+				case 10:
+				case 11:
+					plware = new PLPawnItem_AmmoClip();
+					break;
+				case 12:
+					plware = new PLPawnItem_AntiFireGrenade();
+					break;
+				case 13:
+					plware = new PLPawnItem_FBSellTool();
+					break;
+				case 14:
+					plware = new PLPawnItem_Syringe(ESyringeType.HEAL_HEALTH_BONUS);
+					break;
+				case 15:
+					plware = new PLPawnItem_HealGrenade();
+					break;
+				case 16:
+					plware = new PLPawnItem_HeavyPistol();
+					break;
+				case 17:
+					plware = new PLPawnItem_RepairGrenade();
+					break;
+				case 18:
+					plware = new PLPawnItem_HeldBeamPistol();
+					break;
+				case 19:
+					plware = new PLPawnItem_IceSpikes(0);
+					break;
+				case 20:
+					plware = new PLPawnItem_WDHeavy();
+					break;
+				case 21:
+					plware = new PLPawnItem_StunGrenade();
+					break;
+				case 22:
+					plware = new PLPawnItem_PulseGrenade();
+					break;
+				case 23:
+					plware = new PLPawnItem_MiniGrenade();
+					break;
+				case 24:
+					plware = new PLPawnItem_VortexGrenade();
+					break;
+				default:
+					plware = PLPawnItem_Food.CreateRandom(inRarity, UnityEngine.Random.Range(0, 50000));
+					break;
+			}
+			PLPawnItem plpawnItem = plware as PLPawnItem;
+			if (plpawnItem != null)
+			{
+				plpawnItem.Level = Mathf.RoundToInt(Mathf.Pow((float)plrand.NextDouble(), inRarity) * 3f);
+				plpawnItem.Level += Mathf.RoundToInt((PLServer.Instance != null) ? (PLServer.Instance.ChaosLevel * 0.2f) : 0f);
+                if (Configs.level) 
+				{
+					plpawnItem.Level = Randomic.ItemLevel(plrand.Next());
+				}
+			}
+			__result = plpawnItem;
+			return __result;
 		}
-		
-		
 	}
 }

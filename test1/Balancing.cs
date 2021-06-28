@@ -9,7 +9,7 @@ namespace Randomizer
 {
     [HarmonyPatch(typeof(PLHull), MethodType.Constructor, new Type[] { typeof(EHullType), typeof(int) })]
     class AncientHullPatch
-    {
+    {       
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> Instructions)
         {
             List<CodeInstruction> targetSequence = new List<CodeInstruction>

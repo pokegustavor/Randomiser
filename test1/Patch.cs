@@ -323,5 +323,149 @@ namespace Randomizer
             Random.random(__instance, previewStats);
             Logger.Info("local");
         }
-    }    
+    }
+    [HarmonyPatch(typeof(PLPersistantShipInfo), MethodType.Constructor, new Type[] { typeof(EShipType), typeof(int),typeof(PLSectorInfo),typeof(int),typeof(bool),typeof(bool),typeof(bool),typeof(int),typeof(int) })]
+    class RandomShips 
+    { 
+        static void Postfix(PLPersistantShipInfo __instance) 
+        {
+            if (Configs.randomship) 
+            {
+                Random.randomship(__instance);
+                Logger.Info("local");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(PLServerClassInfo),"Update")]
+    class RandomItems
+    {
+        static void Prefix(bool ___CreatedStartingItems, out bool __state) 
+        {
+            __state = ___CreatedStartingItems;
+        }
+
+        static void Postfix(bool __state, PLServerClassInfo __instance) 
+        { 
+            if(!__state && PhotonNetwork.isMasterClient && PLServer.Instance != null && PLEncounterManager.Instance.PlayerShip != null) 
+            {
+                int place = 0;
+                PLPawnInventoryBase classLockerInventory = __instance.ClassLockerInventory;
+                PLServer instance = PLServer.Instance;
+                int pawnInvItemIDCounter = instance.PawnInvItemIDCounter;
+                classLockerInventory.Clear();
+                while(place < 4) 
+                {
+                    pawnInvItemIDCounter++;
+                    classLockerInventory.UpdateItem(pawnInvItemIDCounter, Randomic.Item(pawnInvItemIDCounter), 0, Configs.level? Randomic.ItemLevel(pawnInvItemIDCounter) :0, -1);
+                    place++;
+                }
+            }
+        }
+    }
+    [HarmonyPatch(typeof(PLShipInfo), "CreateDefaultItemsForEnemyBotPlayer")]
+    class RandomItemsEnemys 
+    { 
+        static void Postfix(PLPlayer inPlayer) 
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
+                int place = 0;
+                PLPawnInventoryBase myInventory = inPlayer.MyInventory;
+                PLServer instance = PLServer.Instance;
+                int pawnInvItemIDCounter = instance.PawnInvItemIDCounter;
+                myInventory.Clear();
+                while (place < 4)
+                {
+                    pawnInvItemIDCounter++;
+                    myInventory.UpdateItem(pawnInvItemIDCounter, Randomic.Item(pawnInvItemIDCounter), 0, Configs.level ? Randomic.ItemLevel(pawnInvItemIDCounter) : 0, -1);
+                    place++;
+                }
+            }
+        }
+    }
+    [HarmonyPatch(typeof(PLAlchemistShipInfo), "CreateDefaultItemsForEnemyBotPlayer")]
+    class RandomItemsEnemysAlchemy
+    {
+        static void Postfix(PLPlayer inPlayer)
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
+                int place = 0;
+                PLPawnInventoryBase myInventory = inPlayer.MyInventory;
+                PLServer instance = PLServer.Instance;
+                int pawnInvItemIDCounter = instance.PawnInvItemIDCounter;
+                myInventory.Clear();
+                while (place < 4)
+                {
+                    pawnInvItemIDCounter++;
+                    myInventory.UpdateItem(pawnInvItemIDCounter, Randomic.Item(pawnInvItemIDCounter), 0, Configs.level ? Randomic.ItemLevel(pawnInvItemIDCounter) : 0, -1);
+                    place++;
+                }
+            }
+        }
+    }
+    [HarmonyPatch(typeof(PLIntrepidCommanderInfo), "CreateDefaultItemsForEnemyBotPlayer")]
+    class RandomItemsEnemysGrim
+    {
+        static void Postfix(PLPlayer inPlayer)
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
+                int place = 0;
+                PLPawnInventoryBase myInventory = inPlayer.MyInventory;
+                PLServer instance = PLServer.Instance;
+                int pawnInvItemIDCounter = instance.PawnInvItemIDCounter;
+                myInventory.Clear();
+                while (place < 4)
+                {
+                    pawnInvItemIDCounter++;
+                    myInventory.UpdateItem(pawnInvItemIDCounter, Randomic.Item(pawnInvItemIDCounter), 0, Configs.level ? Randomic.ItemLevel(pawnInvItemIDCounter) : 0, -1);
+                    place++;
+                }
+            }
+        }
+    }
+    [HarmonyPatch(typeof(PLServer), "NetworkBeginWarp")]
+    class Jump 
+    { 
+        static void Postfix() 
+        { 
+            if(Configs.jumpmax > 0 && PhotonNetwork.isMasterClient) 
+            {
+                Configs.currentjump++;
+                if(Configs.currentjump >= Configs.jumpmax) 
+                {
+                    Random.random(PLEncounterManager.Instance.PlayerShip, false);
+                    Configs.currentjump = 0;
+                    Messaging.Notification("Loadout randomized ", PhotonTargets.All, 0, 4000, false);
+                }
+                else 
+                {
+                    Messaging.Notification("Jumps until next randomization: " + (Configs.jumpmax - Configs.currentjump), PhotonTargets.All, 0, 4000, false);
+                }
+            }    
+        }
+    }
+    [HarmonyPatch(typeof(PLServer), "AttemptBlindJump")]
+    class Blindjump
+    {
+        static void Postfix()
+        {
+            if (Configs.jumpmax > 0 && PhotonNetwork.isMasterClient)
+            {
+                Configs.currentjump++;
+                if (Configs.currentjump >= Configs.jumpmax)
+                {
+                    Random.random(PLEncounterManager.Instance.PlayerShip, false);
+                    Configs.currentjump = 0;
+                    Messaging.Notification("Loadout randomized ", PhotonTargets.All, 0, 4000, false);
+                }
+                else
+                {
+                    Messaging.Notification("Jumps until next randomization: " + (Configs.jumpmax - Configs.currentjump), PhotonTargets.All, 0, 4000, false);
+                }
+            }
+        }
+    }
 }

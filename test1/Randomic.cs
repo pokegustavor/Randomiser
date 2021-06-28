@@ -202,7 +202,37 @@
             return value;
         }
         
+        public static int ItemLevel(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 15);
+            return value;
+        }
 
+        public static EShipType Type(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 58);
+            if(value == 5 || value == 7 || value == 8 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 24 || value == 37 || (value >= 38 && value <=43) || value == 48 || value == 49 || value == 54 || value == 55 || value == 57) 
+            {
+                value = 52;
+            }
+            return (EShipType)value;
+        }
+        public static int Item(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 33);
+            if(value == 32 || value == 31 || value == 18 || value == 17 || value == 15 || value == 14 || value == 13 || value == 6 || value == 5 || value == 1 || value == 0) 
+            {
+                value += 6;
+                if(value > 33) 
+                {
+                    value -= 10;
+                }
+            }
+            return value;
+        }
     }
     
 }

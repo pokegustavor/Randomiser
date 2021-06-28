@@ -1,5 +1,6 @@
 ﻿using PulsarPluginLoader.Chat.Commands;
 using PulsarPluginLoader.Utilities;
+using System.Collections.Generic;
 
 namespace Randomizer
 {
@@ -31,7 +32,7 @@ namespace Randomizer
             switch (subcommand[0].ToLower())
             {
                 default:
-                    PLServer.Instance.AddNotification("Subcommands: roll, (limit + (value or off), level, vannila", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                    PLServer.Instance.AddNotification("Subcommands: roll, (limit + (value or off), level, vannila, rships, jumprandom, jumplimit", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     break;
                 case "roll":
                     if ((Configs.times < Configs.limit || Configs.limit <= -1))
@@ -47,8 +48,7 @@ namespace Randomizer
                     }
                     break;
                 case "limit":
-                    
-                    if (ArgConvertSuccess)
+                    if (ArgConvertSuccess && CommandArg > 0)
                     {
                         Configs.limit = CommandArg;
                         Configs.times = 0;
@@ -63,22 +63,55 @@ namespace Randomizer
                     {
                         PLServer.Instance.AddNotification("Invalid limit value (Must be 1 or higher) or off", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     }
-
                     break;
                 case "level":
                 case "lv":
                     Configs.level = !Configs.level;
                     if (Configs.shouldlevel && Configs.level)
                     {
-                        Random.randomlevel(PLEncounterManager.Instance.PlayerShip);                       
+                        Random.randomlevel(PLEncounterManager.Instance.PlayerShip);
                     }
                     Configs.shouldlevel = false;
-                    Messaging.Notification("Random Levels " + (Configs.level ? "enabled":"disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                    Messaging.Notification("Random Levels " + (Configs.level ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
                     break;
                 case "vannila":
                 case "vn":
                     Configs.bossitem = !Configs.bossitem;
                     Messaging.Notification("Not obtanable items " + (Configs.bossitem ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                    break;
+                case "Rships":
+                case "Rs":
+                    Configs.randomship = !Configs.randomship;
+                    Messaging.Notification("Random ship types " + (Configs.randomship ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                    if (Configs.shouldrandomship)
+                    {
+                        foreach (PLPersistantShipInfo ship in PLServer.Instance.AllPSIs)
+                        {
+                            Random.randomship(ship);
+                        }
+                        Configs.shouldrandomship = false;
+                    }
+                    break;
+                case "jumprandom":
+                case "jr":
+                case "jumprandomizer":
+                    Configs.randomjump = !Configs.randomjump;
+                    Configs.jumpmax = Configs.randomjump ? 5 : -1;
+                    Messaging.Notification("Jump Randomizer " + (Configs.randomjump ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                    Random.setlock(PLEncounterManager.Instance.PlayerShip, Configs.randomjump);
+                    break;
+                case "jumplimit":
+                case "jl":
+                    if (ArgConvertSuccess && CommandArg > 0)
+                    {
+                        Configs.jumpmax = CommandArg;
+                        Configs.currentjump = 0;
+                        PLServer.Instance.AddNotification("New jump limit: " + Configs.jumpmax, PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 4000, false);
+                    }
+                    else
+                    {
+                        PLServer.Instance.AddNotification("Invalid limit value (Must be 1 or higher)", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                    }
                     break;
             }
             return false;
