@@ -30,13 +30,13 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 16);
-            if (value == 4 || value == 15)
+            while (value == 4 || value == 15)
             {
-                value = 0;
+                value = random.Next(0, 16);
             }
-            if (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13))
+            while (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13))
             {
-                value += 8;
+                value = random.Next(0, 16);
             }
             return value;
         }
@@ -44,9 +44,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 20);
-            if (value == 10)
+            while (value == 10)
             {
-                value = 0;
+                value = random.Next(0, 20);
             }
             return value;
         }
@@ -54,9 +54,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 15);
-            if (value == 7)
+            while (value == 7)
             {
-                value = 0;
+                value = random.Next(0, 15);
             }
             if (!Configs.bossitem && (value == 9 || value == 15))
             {
@@ -68,9 +68,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 14);
-            if (value == 4)
+            while (value == 4)
             {
-                value = 0;
+                value = random.Next(0, 14);
             }
             return value;
         }
@@ -84,13 +84,13 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 5);
-            if (value == 1)
+            while (value == 1)
             {
-                value = 0;
+                value = random.Next(0, 5);
             }
-            if (!Configs.bossitem && (value == 2 || value == 3))
+            while (!Configs.bossitem && (value == 2 || value == 3))
             {
-                value += 2;
+                value = random.Next(0, 5);
             }
             return value;
         }
@@ -110,9 +110,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 5);
-            if (value == 2)
+            while (value == 2)
             {
-                value = 0;
+                value = random.Next(0, 5);
             }
             return value;
         }
@@ -120,13 +120,13 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 18);
-            if (value == 5)
+            while (value == 5)
             {
-                value = 7;
+                value = random.Next(0, 18);
             }
-            if (!Configs.bossitem && (value == 7 || value == 8 || value == 18))
+            while (!Configs.bossitem && (value == 7 || value == 8 || value == 18))
             {
-                value += 2;
+                value = random.Next(0, 18);
             }
             return value;
         }
@@ -147,13 +147,13 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 9);
-            if (value == 3)
+            while (value == 3)
             {
-                value = 0;
+                value = random.Next(0, 9);
             }
-            if (!Configs.bossitem && (value == 5))
+            while (!Configs.bossitem && (value == 5))
             {
-                value += 1;
+                value = random.Next(0, 9);
             }
             return value;
         }
@@ -173,9 +173,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 35);
-            if (value == 8)
+            while (value == 8)
             {
-                value = 18;
+                value = random.Next(0, 35);
             }
             return value;
         }
@@ -183,9 +183,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 6);
-            if (value == 3)
+            while (value == 3)
             {
-                value = 0;
+                value = random.Next(0, 6);
             }
             return value;
         }
@@ -232,9 +232,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 58);
-            if (value == 5 || value == 7 || value == 8 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 24 || value == 37 || (value >= 38 && value <= 43) || value == 48 || value == 49 || value == 54 || value == 55 || value == 57)
+            while (value == 5 || value == 7 || value == 8 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 24 || value == 37 || (value >= 38 && value <= 43) || value == 48 || value == 49 || value == 54 || value == 55 || value == 57)
             {
-                value = 52;
+                value = random.Next(0, 58);
             }
             return (EShipType)value;
         }
@@ -242,17 +242,9 @@
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, 33);
-            if (value == 32 || value == 31 || value == 18 || value == 17 || value == 15 || value == 14 || value == 13 || value == 6 || value == 5 || value == 1 || value == 0)
+            while (value == 32 || value == 31 || value == 18 || value == 17 || value == 15 || value == 14 || value == 13 || value == 6 || value == 5 || value == 1 || value == 0)
             {
-                value += 6;
-                if (value > 33)
-                {
-                    value -= 10;
-                }
-                else if (value == 6)
-                {
-                    value = 7;
-                }
+                value = random.Next(0, 33);
             }
             return value;
         }
@@ -261,13 +253,9 @@
             System.Random random = new System.Random(Random4() * seed);
             int type = random.Next(1, 34);
             PLShipComponent component;
-            if (type == 4 || (type >= 12 && type <= 15) || type == 18 || type == 29)
+            while (type == 4 || (type >= 12 && type <= 15) || type == 18 || type == 29)
             {
-                type++;
-                if (type >= 12 && type <= 15)
-                {
-                    type += 10;
-                }
+                type = random.Next(1, 34);
             }
             switch (type)
             {
