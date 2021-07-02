@@ -195,6 +195,25 @@
             int value = random.Next(0, 5);           
             return value;
         }
+        public static int SOS(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 2);
+            return value;
+        }
+        public static int Mission(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 12);
+            return value;
+        }
+        public static int Recipe(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, 16);
+            return value;
+        }
+
         public static int Level(int seed = 1, ESlotType type = ESlotType.E_COMP_ID_MAX) 
         {
             System.Random random = new System.Random(Random4() * seed);
@@ -230,9 +249,103 @@
                 {
                     value -= 10;
                 }
+                else if (value == 6) 
+                {
+                    value = 7;
+                }
             }
             return value;
         }
+        public static PLShipComponent Comp(int seed = 1, int level = 0) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int type = random.Next(1, 34);
+            PLShipComponent component;
+            if (type == 4 || (type >= 12 && type <= 15) || type == 18 || type == 29)
+            {
+                type++;
+                if (type >= 12 && type <= 15)
+                {
+                    type += 10;
+                }
+            }
+            switch (type) 
+            {
+                default:
+                case 1:
+                    component = new PLShieldGenerator((EShieldGeneratorType)Randomic.Shield(seed), level);
+                    break;
+                case 2:
+                    component = new PLWarpDrive((EWarpDriveType)Randomic.Jump(seed), level);
+                    break;
+                case 3:
+                    component = new PLReactor((EReactorType)Randomic.Reactor(seed), level);
+                    break;
+                case 5:
+                    component = new PLSensor();
+                    break;
+                case 6:
+                    component = new PLHull((EHullType)Randomic.Hull(seed), level);
+                    break;
+                case 7:
+                    component = new PLCPU((ECPUClass)Randomic.Processor(seed), level);
+                    break;
+                case 8:
+                    component = new PLOxygenGenerator((EO2GeneratorType)Randomic.O2(seed),level);
+                    break;
+                case 9:
+                    component = new PLThruster((EThrusterType)Randomic.Thruster(seed), level);
+                    break;
+                case 10:
+                    component = PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret(seed), level, 0, 12), null);
+                    break;
+                case 11:
+                    component = PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(11, Randomic.MainTurret(seed), level, 0, 12), null);
+                    break;
+                case 16:
+                    component = new PLHullPlating(EHullPlatingType.E_HULLPLATING_CCGE, level);
+                    break;
+                case 17:
+                    component = new PLWarpDriveProgram((EWarpDriveProgramType)Randomic.Program(seed), level);
+                    break;
+                case 19:
+                    component = new PLNuclearDevice((ENuclearDeviceType)Randomic.Nuclear(seed), level);
+                    break;
+                case 20:
+                    component = new PLTrackerMissile((ETrackerMissileType)Randomic.Missile(seed), level);
+                    break;
+                case 22:
+                    component = new PLDistressSignal((EDistressSignalType)Randomic.SOS(seed), level);
+                    break;
+                case 23:
+                    component = new PLMissionShipComponent(Randomic.Mission(seed), level);
+                    break;
+                case 25:
+                    component = new PLInertiaThruster((EInertiaThrusterType)Randomic.Inertia(seed), level);
+                    break;
+                case 26:
+                    component = new PLManeuverThruster((EManeuverThrusterType)Randomic.Maneuver(seed), level);
+                    break;
+                case 27:
+                    component = new PLCaptainsChair((ECaptainsChairType)Randomic.Chair(seed), level);
+                    break;
+                case 28:
+                    component = new PLExtractor((EExtractorType)Randomic.Extractor(seed), level);
+                    break;
+                case 30:
+                    component = new PLFBRecipeModule((FBRecipe)Randomic.Recipe(seed), level);
+                    break;
+                case 33:
+                    component = new PLCloakingSystem((ECloakingSystemType)Randomic.Cloak(seed), level);
+                    break;
+                case 34:
+                    component = new PLPolytechModule((EPolytechModuleType)Randomic.Polytech(seed), level);
+                    break;
+            }
+            return component;
+        }
+
+
     }
     
 }

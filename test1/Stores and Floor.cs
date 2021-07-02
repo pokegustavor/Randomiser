@@ -182,4 +182,15 @@ namespace Randomizer
 			return __result;
 		}
 	}
+	[HarmonyPatch(typeof(PLPickupRandomComponent), "SetupRandComp")]
+	class FloorItems 
+	{ 
+		static void Postfix(PLPickupRandomComponent __instance) 
+		{
+            if (__instance.RandCompSetup) 
+			{
+				__instance.RandComp = (int)Randomic.Comp(__instance.GetHashCode(), Configs.level? Randomic.Level(__instance.GetHashCode()): UnityEngine.Random.Range(0, 2)).getHash();
+			}
+		}
+	}
 }
