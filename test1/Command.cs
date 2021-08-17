@@ -32,7 +32,7 @@ namespace Randomizer
             switch (subcommand[0].ToLower())
             {
                 default:
-                    PLServer.Instance.AddNotification("Subcommands: roll, (limit + (value or off), level, vannila, rships, jumprandom, jumplimit", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
+                    PLServer.Instance.AddNotification("Subcommands: roll, (limit + (value or off), level, vannila, jumprandom, jumplimit", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
                     break;
                 case "roll":
                     if ((Configs.times < Configs.limit || Configs.limit <= -1))

@@ -324,6 +324,15 @@ namespace Randomizer
             Logger.Info("local");
         }
     }
+    [HarmonyPatch(typeof(PLFluffyShipInfo2), "SetupShipStats")]
+    class FluffyTwoPatch 
+    {
+        static void Postfix(PLFluffyShipInfo2 __instance, bool previewStats)
+        {
+            Random.random(__instance, previewStats);
+            Logger.Info("local");
+        }
+    }
     [HarmonyPatch(typeof(PLPersistantShipInfo), MethodType.Constructor, new Type[] { typeof(EShipType), typeof(int),typeof(PLSectorInfo),typeof(int),typeof(bool),typeof(bool),typeof(bool),typeof(int),typeof(int) })]
     class RandomShips 
     { 
