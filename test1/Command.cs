@@ -1,12 +1,12 @@
-﻿using PulsarPluginLoader.Chat.Commands;
-using PulsarPluginLoader.Utilities;
+﻿using PulsarModLoader.Chat.Commands.CommandRouter;
+using PulsarModLoader.Utilities;
 using System.Collections.Generic;
 
 namespace Randomizer
 {
-    class Command : IChatCommand
+    class Command : ChatCommand
     {
-        public string[] CommandAliases()
+        public override string[] CommandAliases()
         {
             return new string[]
             {
@@ -15,12 +15,12 @@ namespace Randomizer
                 "randomizer"
             };
         }
-        public bool Execute(string arguments, int SenderID)
+        public override void Execute(string arguments)
         {
             if (!PhotonNetwork.isMasterClient)
             {
                 PLServer.Instance.AddNotification("You Must be host to use this command", PLNetworkManager.Instance.LocalPlayerID, PLServer.Instance.GetEstimatedServerMs() + 6000, false);
-                return false;
+                return;
             }
             string[] subcommand = arguments.Split(' ');
             bool ArgConvertSuccess = false;
@@ -114,9 +114,8 @@ namespace Randomizer
                     }
                     break;
             }
-            return false;
         }
-        public string Description()
+        public override string Description()
         {
             if (Configs.limit <= -1)
             {

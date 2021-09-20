@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.IO;
 using HarmonyLib;
-using PulsarPluginLoader;
+using PulsarModLoader;
 using UnityEngine;
 
 namespace Randomizer
 {
-    public class Plugin : PulsarPlugin
+    public class Mod : PulsarMod
     {
         public override string Version => "6.1";
 
@@ -20,8 +20,8 @@ namespace Randomizer
         {
             return "pokegustavo.Randomiser";
         }
-
-        internal static Plugin plugin;
+        /*
+        internal static Mod plugin;
         public Plugin()
         {            
             CustomSaves.SaveManager.instance.RegisterReader(this, AuxReader);
@@ -111,5 +111,6 @@ namespace Randomizer
                 }
             }
         }
+        */
     }
 }
