@@ -8,7 +8,7 @@ namespace Randomizer
 {
     public class Mod : PulsarMod
     {
-        public override string Version => "6.1";
+        public override string Version => "6.2";
 
         public override string Author => "pokegustavo + badryuiner's custom save";
 
@@ -20,12 +20,11 @@ namespace Randomizer
         {
             return "pokegustavo.Randomiser";
         }
-        /*
         internal static Mod plugin;
-        public Plugin()
-        {            
-            CustomSaves.SaveManager.instance.RegisterReader(this, AuxReader);
-            CustomSaves.SaveManager.instance.RegisterWriter(this, AuxWriter);
+        public Mod()
+        {
+            SaveManager.instance.RegisterReader(this, AuxReader);
+            SaveManager.instance.RegisterWriter(this, AuxWriter);
             config = new Config { level = false, bossitem = false, shouldlevel = true, limit = -1, times = 0, randomship = false, shouldrandomship = true, randomjump = false, currentjump = 0, jumpmax = -1 };
             plugin = this;
         }
@@ -67,25 +66,25 @@ namespace Randomizer
         internal IEnumerator SetupConfigs()
         {
             while (PLEncounterManager.Instance?.PlayerShip?.AuxConfig == null) yield return new WaitForEndOfFrame();
-            if (Plugin.config.shouldlevel) Configs.shouldlevel = true;
+            if (Mod.config.shouldlevel) Configs.shouldlevel = true;
             yield return new WaitForEndOfFrame();
-            if (Plugin.config.level) Configs.level = true;
+            if (Mod.config.level) Configs.level = true;
             yield return new WaitForEndOfFrame();
-            if (!Plugin.config.bossitem) Configs.bossitem = false;
+            if (!Mod.config.bossitem) Configs.bossitem = false;
             yield return new WaitForEndOfFrame();
-            Configs.times = Plugin.config.times;
+            Configs.times = Mod.config.times;
             yield return new WaitForEndOfFrame();
-            Configs.limit = Plugin.config.limit;
+            Configs.limit = Mod.config.limit;
             yield return new WaitForEndOfFrame();
-            if (Plugin.config.randomship) Configs.randomship = true;
+            if (Mod.config.randomship) Configs.randomship = true;
             yield return new WaitForEndOfFrame();
-            if (!Plugin.config.shouldrandomship) Configs.shouldrandomship = false;
+            if (!Mod.config.shouldrandomship) Configs.shouldrandomship = false;
             yield return new WaitForEndOfFrame();
-            if (Plugin.config.randomjump) Configs.randomjump = true;
+            if (Mod.config.randomjump) Configs.randomjump = true;
             yield return new WaitForEndOfFrame();
-            Configs.currentjump = Plugin.config.currentjump;
+            Configs.currentjump = Mod.config.currentjump;
             yield return new WaitForEndOfFrame();
-            Configs.jumpmax = Plugin.config.jumpmax;
+            Configs.jumpmax = Mod.config.jumpmax;
             yield return new WaitForEndOfFrame();
             Random.setlock(PLEncounterManager.Instance.PlayerShip, Configs.randomjump);
 
@@ -107,10 +106,9 @@ namespace Randomizer
                     Configs.randomjump = false;
                     Configs.jumpmax = -1;
                     Configs.currentjump = 0;
-                    PLServer.Instance.StartCoroutine(Plugin.plugin.SetupConfigs());
+                    PLServer.Instance.StartCoroutine(Mod.plugin.SetupConfigs());
                 }
             }
         }
-        */
     }
 }

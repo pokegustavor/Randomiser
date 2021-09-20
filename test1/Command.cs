@@ -131,9 +131,12 @@ namespace Randomizer
             }
             return $"Randomises your ship loadout(components level 1 and chaos+ 0.5), can only be used {Configs.limit - Configs.times} more Configs.times";
         }
-        public string UsageExample()
+        public override string[] UsageExamples()
         {
-            return "/" + this.CommandAliases()[0] + " roll, (limit + (value or off), level, vannila";
+            return new string[]
+            {
+                "/" + this.CommandAliases()[0] + " roll, (limit + (value or off), level, vannila",
+            };
         }
         public bool PublicCommand()
         {
