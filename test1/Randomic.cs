@@ -1,4 +1,6 @@
-﻿namespace Randomizer
+﻿using System;
+using PulsarModLoader.Content.Components;
+namespace Randomizer
 {
     class Randomic
     {
@@ -29,34 +31,34 @@
         public static int Hull(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 16);
+            int value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + PulsarModLoader.Content.Components.Hull.HullModManager.Instance.HullTypes.Count);
             while (value == 4 || value == 15)
             {
-                value = random.Next(0, 16);
+                value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + PulsarModLoader.Content.Components.Hull.HullModManager.Instance.HullTypes.Count);
             }
             while (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13))
             {
-                value = random.Next(0, 16);
+                value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + PulsarModLoader.Content.Components.Hull.HullModManager.Instance.HullTypes.Count);
             }
             return value;
         }
         public static int Shield(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 20);
+            int value = random.Next(0, Enum.GetNames(typeof(EShieldGeneratorType)).Length + PulsarModLoader.Content.Components.Shield.ShieldModManager.Instance.ShieldTypes.Count);
             while (value == 10)
             {
-                value = random.Next(0, 20);
+                value = random.Next(0, Enum.GetNames(typeof(EShieldGeneratorType)).Length + PulsarModLoader.Content.Components.Shield.ShieldModManager.Instance.ShieldTypes.Count);
             }
             return value;
         }
         public static int Reactor(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 15);
+            int value = random.Next(0, Enum.GetNames(typeof(EReactorType)).Length + PulsarModLoader.Content.Components.Reactor.ReactorModManager.Instance.ReactorTypes.Count);
             while (value == 7)
             {
-                value = random.Next(0, 15);
+                value = random.Next(0, Enum.GetNames(typeof(EReactorType)).Length + PulsarModLoader.Content.Components.Reactor.ReactorModManager.Instance.ReactorTypes.Count);
             }
             if (!Configs.bossitem && (value == 9 || value == 15))
             {
@@ -67,73 +69,73 @@
         public static int Jump(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 14);
+            int value = random.Next(0, Enum.GetNames(typeof(EWarpDriveType)).Length + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
             while (value == 4)
             {
-                value = random.Next(0, 14);
+                value = random.Next(0, Enum.GetNames(typeof(EWarpDriveType)).Length + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
             }
             return value;
         }
         public static int Thruster(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 4);
+            int value = random.Next(0, Enum.GetNames(typeof(EThrusterType)).Length + PulsarModLoader.Content.Components.Thruster.ThrusterModManager.Instance.ThrusterTypes.Count);
             return value;
         }
         public static int Inertia(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 5);
+            int value = random.Next(0, Enum.GetNames(typeof(EInertiaThrusterType)).Length + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
             while (value == 1)
             {
-                value = random.Next(0, 5);
+                value = random.Next(0, Enum.GetNames(typeof(EInertiaThrusterType)).Length + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
             }
             while (!Configs.bossitem && (value == 2 || value == 3))
             {
-                value = random.Next(0, 5);
+                value = random.Next(0, Enum.GetNames(typeof(EInertiaThrusterType)).Length + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
             }
             return value;
         }
         public static int Maneuver(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 2);
+            int value = random.Next(0, Enum.GetNames(typeof(EManeuverThrusterType)).Length + PulsarModLoader.Content.Components.ManeuverThruster.ManeuverThrusterModManager.Instance.ManeuverThrusterTypes.Count);
             return value;
         }
         public static int Chair(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 2);
+            int value = random.Next(0, Enum.GetNames(typeof(ECaptainsChairType)).Length + PulsarModLoader.Content.Components.CaptainsChair.CaptainsChairModManager.Instance.CaptainsChairTypes.Count);
             return value;
         }
         public static int Extractor(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 5);
+            int value = random.Next(0, Enum.GetNames(typeof(EExtractorType)).Length + PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.ExtractorTypes.Count);
             while (value == 2)
             {
-                value = random.Next(0, 5);
+                value = random.Next(0, Enum.GetNames(typeof(EExtractorType)).Length + PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.ExtractorTypes.Count);
             }
             return value;
         }
         public static int Turret(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 18);
+            int value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             while (value == 5)
             {
-                value = random.Next(0, 18);
+                value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             }
             while (!Configs.bossitem && (value == 7 || value == 8 || value == 18))
             {
-                value = random.Next(0, 18);
+                value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             }
             return value;
         }
         public static int MainTurret(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 6);
+            int value = random.Next(0, PulsarModLoader.Content.Components.MegaTurret.MegaTurretModManager.Instance.VanillaMegaTurretMaxType + PulsarModLoader.Content.Components.MegaTurret.MegaTurretModManager.Instance.MegaTurretTypes.Count);
             return value;
         }
         public static int Cloak(int seed = 1)
@@ -146,14 +148,14 @@
         public static int Missile(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 9);
+            int value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             while (value == 3)
             {
-                value = random.Next(0, 9);
+                value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             }
             while (!Configs.bossitem && (value == 5))
             {
-                value = random.Next(0, 9);
+                value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             }
             return value;
         }
@@ -166,33 +168,33 @@
         public static int Processor(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(1, 29);
+            int value = random.Next(1, Enum.GetNames(typeof(ECPUClass)).Length + PulsarModLoader.Content.Components.CPU.CPUModManager.Instance.CPUTypes.Count);
             return value;
         }
         public static int Program(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 35);
+            int value = random.Next(0, Enum.GetNames(typeof(EWarpDriveProgramType)).Length + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
             while (value == 8)
             {
-                value = random.Next(0, 35);
+                value = random.Next(0, Enum.GetNames(typeof(EWarpDriveProgramType)).Length + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
             }
             return value;
         }
         public static int Nuclear(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 6);
+            int value = random.Next(0, Enum.GetNames(typeof(ENuclearDeviceType)).Length + PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.NuclearDeviceTypes.Count);
             while (value == 3)
             {
-                value = random.Next(0, 6);
+                value = random.Next(0, Enum.GetNames(typeof(ENuclearDeviceType)).Length + PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.NuclearDeviceTypes.Count);
             }
             return value;
         }
         public static int Polytech(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 5);
+            int value = random.Next(0, Enum.GetNames(typeof(EPolytechModuleType)).Length + PulsarModLoader.Content.Components.PolytechModule.PolytechModuleModManager.Instance.PolytechModuleTypes.Count);
             return value;
         }
         public static int SOS(int seed = 1)
@@ -204,13 +206,20 @@
         public static int Mission(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 12);
+            int value = random.Next(0, PulsarModLoader.Content.Components.MissionShipComponent.MissionShipComponentModManager.Instance.VanillaMissionShipComponentMaxType + PulsarModLoader.Content.Components.MissionShipComponent.MissionShipComponentModManager.Instance.MissionShipComponentTypes.Count);
             return value;
         }
         public static int Recipe(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 16);
+            int value = random.Next(0, PulsarModLoader.Content.Components.FBRecipeModule.FBRecipeModuleModManager.Instance.VanillaFBRecipeModuleMaxType + PulsarModLoader.Content.Components.FBRecipeModule.FBRecipeModuleModManager.Instance.FBRecipeModuleTypes.Count);
+            return value;
+        }
+
+        public static int AutoTurret(int seed = 1) 
+        {
+            System.Random random = new System.Random(Random4() * seed);
+            int value = random.Next(0, Enum.GetNames(typeof(EAutoTurretType)).Length + PulsarModLoader.Content.Components.AutoTurret.AutoTurretModManager.Instance.AutoTurretTypes.Count);
             return value;
         }
 
@@ -261,82 +270,82 @@
             {
                 default:
                 case 1:
-                    component = new PLShieldGenerator((EShieldGeneratorType)Randomic.Shield(seed), level);
+                    component = new PLShieldGenerator((EShieldGeneratorType)Shield(seed), level);
                     break;
                 case 2:
-                    component = new PLWarpDrive((EWarpDriveType)Randomic.Jump(seed), level);
+                    component = new PLWarpDrive((EWarpDriveType)Jump(seed), level);
                     break;
                 case 3:
-                    component = new PLReactor((EReactorType)Randomic.Reactor(seed), level);
+                    component = new PLReactor((EReactorType)Reactor(seed), level);
                     break;
                 case 5:
                     component = new PLSensor();
                     break;
                 case 6:
-                    component = new PLHull((EHullType)Randomic.Hull(seed), level);
+                    component = new PLHull((EHullType)Hull(seed), level);
                     break;
                 case 7:
-                    component = new PLCPU((ECPUClass)Randomic.Processor(seed), level);
+                    component = new PLCPU((ECPUClass)Processor(seed), level);
                     break;
                 case 8:
-                    component = new PLOxygenGenerator((EO2GeneratorType)Randomic.O2(seed), level);
+                    component = new PLOxygenGenerator((EO2GeneratorType)O2(seed), level);
                     break;
                 case 9:
-                    component = new PLThruster((EThrusterType)Randomic.Thruster(seed), level);
+                    component = new PLThruster((EThrusterType)Thruster(seed), level);
                     break;
                 case 10:
-                    component = PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret(seed), level, 0, 12), null);
+                    component = PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Turret(seed), level, 0, 12), null);
                     break;
                 case 11:
-                    component = PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(11, Randomic.MainTurret(seed), level, 0, 12), null);
+                    component = PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(11, MainTurret(seed), level, 0, 12), null);
                     break;
                 case 16:
                     component = new PLHullPlating(EHullPlatingType.E_HULLPLATING_CCGE, level);
                     break;
                 case 17:
-                    component = new PLWarpDriveProgram((EWarpDriveProgramType)Randomic.Program(seed), level);
+                    component = new PLWarpDriveProgram((EWarpDriveProgramType)Program(seed), level);
                     break;
                 case 19:
-                    component = new PLNuclearDevice((ENuclearDeviceType)Randomic.Nuclear(seed), level);
+                    component = new PLNuclearDevice((ENuclearDeviceType)Nuclear(seed), level);
                     break;
                 case 20:
-                    component = new PLTrackerMissile((ETrackerMissileType)Randomic.Missile(seed), level);
+                    component = new PLTrackerMissile((ETrackerMissileType)Missile(seed), level);
                     break;
                 case 21:
                     component = new PLScrapCargo(level);
                     break;
                 case 22:
-                    component = new PLDistressSignal((EDistressSignalType)Randomic.SOS(seed), level);
+                    component = new PLDistressSignal((EDistressSignalType)SOS(seed), level);
                     break;
                 case 23:
-                    component = new PLMissionShipComponent(Randomic.Mission(seed), level);
+                    component = new PLMissionShipComponent(Mission(seed), level);
                     break;
                 case 24:
-                    component = new PLAutoTurret(level);
+                    component = PLAutoTurret.CreateAutoTurretFromHash(AutoTurret(seed),level,0);
                     break;
                 case 25:
-                    component = new PLInertiaThruster((EInertiaThrusterType)Randomic.Inertia(seed), level);
+                    component = new PLInertiaThruster((EInertiaThrusterType)Inertia(seed), level);
                     break;
                 case 26:
-                    component = new PLManeuverThruster((EManeuverThrusterType)Randomic.Maneuver(seed), level);
+                    component = new PLManeuverThruster((EManeuverThrusterType)Maneuver(seed), level);
                     break;
                 case 27:
-                    component = new PLCaptainsChair((ECaptainsChairType)Randomic.Chair(seed), level);
+                    component = new PLCaptainsChair((ECaptainsChairType)Chair(seed), level);
                     break;
                 case 28:
-                    component = new PLExtractor((EExtractorType)Randomic.Extractor(seed), level);
+                    component = new PLExtractor((EExtractorType)Extractor(seed), level);
                     break;
                 case 30:
-                    component = new PLFBRecipeModule((FBRecipe)Randomic.Recipe(seed), level);
+                    component = new PLFBRecipeModule((FBRecipe)Recipe(seed), level);
                     break;
                 case 32:
                     component = new PLSensorDish(ESensorDishType.E_NORMAL, level);
                     break;
                 case 33:
-                    component = new PLCloakingSystem((ECloakingSystemType)Randomic.Cloak(seed), level);
+                    component = new PLCloakingSystem((ECloakingSystemType)Cloak(seed), level);
                     break;
                 case 34:
-                    component = new PLPolytechModule((EPolytechModuleType)Randomic.Polytech(seed), level);
+                    component = new PLPolytechModule((EPolytechModuleType)Polytech(seed), level);
                     break;
             }
             return component;

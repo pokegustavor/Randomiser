@@ -170,11 +170,11 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Shld; i++)
                     {
-                    if (Configs.level)
-                    {
-                        ShildLv = Randomic.Level(i + seed);
-                    }
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(1, Randomic.Shield(seed), ShildLv, 0, 12), null), -1, ESlotType.E_COMP_SHLD);
+                        if (Configs.level)
+                        {
+                            ShildLv = Randomic.Level(i + seed);
+                        }
+                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(1, Randomic.Shield(seed), ShildLv, 0, 12), null), -1, ESlotType.E_COMP_SHLD);
                     }
                     for (int i = 0; i < Salvage; i++)
                     {
@@ -186,11 +186,11 @@ namespace Randomizer
                     }
                     for (int i = 0; i < Turret; i++)
                     {
-                    if (Configs.level)
-                    {
-                        TurretLv = Randomic.Level(i + seed);
-                    }
-                    myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret((i + 1) * seed), TurretLv, 0, 12), null), -1, ESlotType.E_COMP_TURRET);
+                        if (Configs.level)
+                        {
+                            TurretLv = Randomic.Level(i + seed);
+                        }
+                        myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(10, Randomic.Turret((i + 1) * seed), TurretLv, 0, 12), null), -1, ESlotType.E_COMP_TURRET);
                     }
                     for (int i = 0; i < Thrust; i++)
                     {
@@ -223,6 +223,7 @@ namespace Randomizer
                     {
                         CPULv = Randomic.Level(i + seed);
                     }
+                    //myStats.AddShipComponent(new PLCPU((ECPUClass)Randomic.Processor((i + 4) * seed), CPULv), -1, ESlotType.E_COMP_CPU);
                     myStats.AddShipComponent(PLShipComponent.CreateShipComponentFromHash((int)PLShipComponent.createHashFromInfo(7, Randomic.Processor((i + 4) * seed), CPULv, 0, 12), null), -1, ESlotType.E_COMP_CPU);
                     }
                     for (int i = 0; i < Program; i++)
