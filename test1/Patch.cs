@@ -338,7 +338,7 @@ namespace Randomizer
     { 
         static void Postfix(PLPersistantShipInfo __instance) 
         {
-            if (Configs.randomship) 
+            if (Configs.randomship && __instance.ShipName == "" && __instance.CompOverrides.Count == 0) 
             {
                 Random.randomship(__instance);
                 Logger.Info("local");
