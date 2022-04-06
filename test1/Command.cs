@@ -6,6 +6,7 @@ namespace Randomizer
 {
     class Command : ChatCommand
     {
+        static bool warned = false;
         public override string[] CommandAliases()
         {
             return new string[]
@@ -79,17 +80,28 @@ namespace Randomizer
                     Configs.bossitem = !Configs.bossitem;
                     Messaging.Notification("Not obtanable items " + (Configs.bossitem ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
                     break;
-                case "Rships":
-                case "Rs":
-                    Configs.randomship = !Configs.randomship;
-                    Messaging.Notification("Random ship types " + (Configs.randomship ? "enabled" : "disabled"), PLNetworkManager.Instance.LocalPlayer, default, 3000);
-                    if (Configs.shouldrandomship)
+                case "rships":
+                case "rs":
+                    if (warned)
                     {
-                        foreach (PLPersistantShipInfo ship in PLServer.Instance.AllPSIs)
+                        Configs.randomship = !Configs.randomship;
+                        Messaging.Notification("All ships types have being randomized!", PLNetworkManager.Instance.LocalPlayer, default, 3000);
+                        if (Configs.shouldrandomship)
                         {
-                            Random.randomship(ship);
+                            foreach (PLPersistantShipInfo ship in PLServer.Instance.AllPSIs)
+                            {
+                                if (ship != null && ship.ShipInstance == null && (ship.CompOverrides == null || ship.CompOverrides.Count == 0))
+                                {
+                                    Random.randomship(ship);
+                                }
+                            }
+                            Configs.shouldrandomship = false;
                         }
-                        Configs.shouldrandomship = false;
+                    }
+                    else 
+                    {
+                        Messaging.Notification("Warning: This command cannot be undone, are you sure?", PLNetworkManager.Instance.LocalPlayer, default, 6000);
+                        warned = true;
                     }
                     break;
                 case "jumprandom":

@@ -284,10 +284,9 @@ namespace Randomizer
 
         static public void randomship(PLPersistantShipInfo ship) 
         {
-            List<EShipType> types = new List<EShipType>() { EShipType.E_CORRUPTED_DRONE, EShipType.E_DEATHSEEKER_DRONE_SC, EShipType.E_GUARDIAN, EShipType.E_SWARM_CMDR, EShipType.E_SWARM_KEEPER, EShipType.E_UNSEEN_EYE };
-            if (Configs.randomship && !types.Contains(ship.Type) && !ship.ShipInstance.GetIsPlayerShip())
+            if (Configs.randomship && ship != null &&(ship.CompOverrides == null || ship.CompOverrides.Count == 0) && ship.ShipName == "")
             {
-                ship.Type = Randomic.Type(ship.ShipInstance.ShipID * PLServer.Instance.GalaxySeed);
+                ship.Type = Randomic.Type(ship.GetHashCode() * PLServer.Instance.GalaxySeed);
             }
         }
 

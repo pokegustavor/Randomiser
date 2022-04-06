@@ -240,10 +240,10 @@ namespace Randomizer
         public static EShipType Type(int seed = 1)
         {
             System.Random random = new System.Random(Random4() * seed);
-            int value = random.Next(0, 58);
-            while (value == 5 || value == 7 || value == 8 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 24 || value == 37 || (value >= 38 && value <= 43) || value == 48 || value == 49 || value == 54 || value == 55 || value == 57)
+            int value = random.Next(0, 60);
+            while (value == 7 || value == 8 || value == 25 || value == 35 || (value >= 37 && value <= 43) || value == 48 || value == 49 || value == 59)
             {
-                value = random.Next(0, 58);
+                value = random.Next(0, 60);
             }
             return (EShipType)value;
         }
