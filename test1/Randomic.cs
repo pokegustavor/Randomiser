@@ -36,7 +36,7 @@ namespace Randomizer
             {
                 value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + PulsarModLoader.Content.Components.Hull.HullModManager.Instance.HullTypes.Count);
             }
-            while (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13))
+            while (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13 || value == 18))
             {
                 value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + PulsarModLoader.Content.Components.Hull.HullModManager.Instance.HullTypes.Count);
             }
@@ -70,7 +70,7 @@ namespace Randomizer
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, Enum.GetNames(typeof(EWarpDriveType)).Length + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
-            while (value == 4)
+            while (value == 4 || value == 16)
             {
                 value = random.Next(0, Enum.GetNames(typeof(EWarpDriveType)).Length + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
             }
@@ -122,7 +122,7 @@ namespace Randomizer
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
-            while (value == 5)
+            while (value == 5 || value == 19 || value == 20)
             {
                 value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             }
@@ -136,6 +136,10 @@ namespace Randomizer
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, PulsarModLoader.Content.Components.MegaTurret.MegaTurretModManager.Instance.VanillaMegaTurretMaxType + PulsarModLoader.Content.Components.MegaTurret.MegaTurretModManager.Instance.MegaTurretTypes.Count);
+            while(value == 7) 
+            {
+                value = random.Next(0, PulsarModLoader.Content.Components.MegaTurret.MegaTurretModManager.Instance.VanillaMegaTurretMaxType + PulsarModLoader.Content.Components.MegaTurret.MegaTurretModManager.Instance.MegaTurretTypes.Count);
+            }
             return value;
         }
         public static int Cloak(int seed = 1)
@@ -149,7 +153,7 @@ namespace Randomizer
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
-            while (value == 3)
+            while (value == 3 || value == 11)
             {
                 value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             }
@@ -175,7 +179,7 @@ namespace Randomizer
         {
             System.Random random = new System.Random(Random4() * seed);
             int value = random.Next(0, Enum.GetNames(typeof(EWarpDriveProgramType)).Length + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
-            while (value == 8)
+            while (value == 8 || (value >= 36 && value <= 39))
             {
                 value = random.Next(0, Enum.GetNames(typeof(EWarpDriveProgramType)).Length + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
             }
