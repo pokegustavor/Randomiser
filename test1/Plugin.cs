@@ -8,7 +8,7 @@ namespace Randomizer
 {
     public class Mod : PulsarMod
     {
-        public override string Version => "7.0";
+        public override string Version => "7.1";
 
         public override string Author => "pokegustavo + badryuiner's custom save";
 
