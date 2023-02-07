@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System.Reflection.Emit;
 using UnityEngine;
 
 namespace Randomizer
@@ -8,11 +9,11 @@ namespace Randomizer
     {
         static PLShipComponent Postfix(PLShipComponent __result)
         {
-			int num = UnityEngine.Random.Range(0, 5000000) % 25;
+            int seed = PLServer.GetCurrentSector().ID * PLEncounterManager.Instance.PlayerShip.ShipID + PLServer.Instance.GetLowestAvailablePlayerID();
+            PLRand plrand = new PLRand(seed);
+            int num = plrand.Next() % 25;
 			PLShipComponent plshipComponent = null;
 			float inRarity = 4f;
-			int seed = UnityEngine.Random.Range(0, 50000000);
-			PLRand plrand = new PLRand(seed);
 			switch (num)
 			{
 				case 0:
@@ -41,8 +42,8 @@ namespace Randomizer
 					plshipComponent = new PLWarpDriveProgram((EWarpDriveProgramType)Randomic.Program(seed));
 					break;
 				case 13:
-					plshipComponent = PLHullPlating.CreateRandom(inRarity, UnityEngine.Random.Range(0, 50000000));
-					break;
+					plshipComponent = PLHullPlating.CreateHullPlatingFromHash(Randomic.HullPlating(seed), Mathf.RoundToInt(Mathf.Pow((float)plrand.NextDouble(), inRarity) * 4.51f), 0);
+                    break;
 				case 14:
 				case 15:
 					plshipComponent = new PLThruster((EThrusterType)Randomic.Thruster(seed), Mathf.RoundToInt(Mathf.Pow((float)plrand.NextDouble(), inRarity) * 4.7f));
@@ -61,11 +62,11 @@ namespace Randomizer
 					plshipComponent = new PLManeuverThruster((EManeuverThrusterType)Randomic.Maneuver(seed), Mathf.RoundToInt(Mathf.Pow((float)plrand.NextDouble(), inRarity) * 2.7f));
 					break;
 				case 21:
-					plshipComponent = PLAutoTurret.CreateRandom(inRarity, UnityEngine.Random.Range(0, 50000000));
-					break;
+					plshipComponent = PLAutoTurret.CreateAutoTurretFromHash(Randomic.AutoTurret(seed), Mathf.RoundToInt(Mathf.Pow((float)plrand.NextDouble(), inRarity) * 4.51f), 0);
+                    break;
 				case 22:
-					plshipComponent = PLCaptainsChair.CreateRandom(inRarity, UnityEngine.Random.Range(0, 50000000));
-					break;
+					plshipComponent = PLCaptainsChair.CreateCaptainsChairFromHash(Randomic.Chair(seed), Mathf.RoundToInt(Mathf.Pow((float)plrand.NextDouble(), inRarity) * 4.51f), 0);
+                    break;
 				case 23:
 					plshipComponent = new PLExtractor((EExtractorType)Randomic.Extractor(seed), 0, 0);
 					break;
@@ -87,8 +88,9 @@ namespace Randomizer
 	{ 
 	  static PLWare Postfix(PLWare __result) 
 		{
-			int num = UnityEngine.Random.Range(0, 30);
-			PLRand plrand = new PLRand(UnityEngine.Random.Range(0, 50000));
+            int seed = PLServer.GetCurrentSector().ID * PLEncounterManager.Instance.PlayerShip.ShipID + PLServer.Instance.GetLowestAvailablePlayerID();
+            PLRand plrand = new PLRand(seed);
+            int num = plrand.Next() % 31;
 			float inRarity = 7f - Mathf.Clamp(PLServer.Instance.ChaosLevel, 0f, 6f);
 			PLWare plware;
 			switch (num)

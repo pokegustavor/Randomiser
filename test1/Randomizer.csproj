@@ -69,7 +69,7 @@
     <Compile Include="Configs.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Patch.cs" />
-    <Compile Include="Plugin.cs" />
+    <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Randomic.cs" />
     <Compile Include="SaveManager.cs" />
