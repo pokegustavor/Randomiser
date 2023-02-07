@@ -14,7 +14,7 @@ namespace Randomizer
     {
         public static int RandomSeed()
         {
-            System.Random random = new System.Random(PLServer.GetCurrentSector().ID * PLEncounterManager.Instance.PlayerShip.ShipID);
+            System.Random random = new System.Random(PLServer.GetCurrentSector().ID * PLEncounterManager.Instance.PlayerShip.ShipID + PLServer.Instance.GalaxySeed + (int)UnityEngine.Time.time);
             int value = random.Next(540, 2584);
             return value;
         }
