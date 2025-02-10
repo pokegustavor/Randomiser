@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 using PulsarModLoader.Content.Components;
 using PulsarModLoader.Content.Components.Hull;
 using PulsarModLoader.Content.Components.InertiaThruster;
@@ -14,7 +15,15 @@ namespace Randomizer
     {
         public static int RandomSeed()
         {
-            System.Random random = new System.Random(PLServer.GetCurrentSector().ID * PLEncounterManager.Instance.PlayerShip.ShipID + PLServer.Instance.GalaxySeed + (int)UnityEngine.Time.time);
+            System.Random random;
+            if (PLServer.GetCurrentSector() != null && PLEncounterManager.Instance != null && PLEncounterManager.Instance.PlayerShip != null && PLServer.Instance != null)
+            {
+                random = new System.Random(PLServer.GetCurrentSector().ID * PLEncounterManager.Instance.PlayerShip.ShipID + PLServer.Instance.GalaxySeed + (int)UnityEngine.Time.time);
+            }
+            else 
+            {
+                random = new System.Random();
+            }
             int value = random.Next(540, 2584);
             return value;
         }
@@ -22,14 +31,14 @@ namespace Randomizer
         {
             bool exotic = PulsarModLoader.ModManager.Instance.GetMod("Exotic Components") != null;
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + HullModManager.Instance.HullTypes.Count);
+            int value = random.Next(0, HullModManager.Instance.VanillaHullMaxType + HullModManager.Instance.HullTypes.Count);
             while (value == 4 || value == 15 || (exotic && value == HullModManager.Instance.GetHullIDFromName("Flagship Hull")))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + HullModManager.Instance.HullTypes.Count);
+                value = random.Next(0, HullModManager.Instance.VanillaHullMaxType + HullModManager.Instance.HullTypes.Count);
             }
             while (!Configs.bossitem && (value == 5 || value == 6 || value == 8 || value == 10 || value == 11 || value == 12 || value == 13 || value == 18))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EHullType)).Length + HullModManager.Instance.HullTypes.Count);
+                value = random.Next(0, HullModManager.Instance.VanillaHullMaxType + HullModManager.Instance.HullTypes.Count);
             }
             return value;
         }
@@ -37,10 +46,10 @@ namespace Randomizer
         {
             bool exotic = PulsarModLoader.ModManager.Instance.GetMod("Exotic Components") != null;
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EShieldGeneratorType)).Length + PulsarModLoader.Content.Components.Shield.ShieldModManager.Instance.ShieldTypes.Count);
+            int value = random.Next(0, ShieldModManager.Instance.VanillaShieldMaxType + PulsarModLoader.Content.Components.Shield.ShieldModManager.Instance.ShieldTypes.Count);
             while (value == 10 || (exotic && value == ShieldModManager.Instance.GetShieldIDFromName("Flagship Shield")))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EShieldGeneratorType)).Length + PulsarModLoader.Content.Components.Shield.ShieldModManager.Instance.ShieldTypes.Count);
+                value = random.Next(0, ShieldModManager.Instance.VanillaShieldMaxType + PulsarModLoader.Content.Components.Shield.ShieldModManager.Instance.ShieldTypes.Count);
             }
             return value;
         }
@@ -48,10 +57,10 @@ namespace Randomizer
         {
             bool exotic = PulsarModLoader.ModManager.Instance.GetMod("Exotic Components") != null;
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EReactorType)).Length + PulsarModLoader.Content.Components.Reactor.ReactorModManager.Instance.ReactorTypes.Count);
+            int value = random.Next(0, ReactorModManager.Instance.VanillaReactorMaxType + PulsarModLoader.Content.Components.Reactor.ReactorModManager.Instance.ReactorTypes.Count);
             while (value == 7 || (exotic && value == ReactorModManager.Instance.GetReactorIDFromName("Flagship Reactor")))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EReactorType)).Length + PulsarModLoader.Content.Components.Reactor.ReactorModManager.Instance.ReactorTypes.Count);
+                value = random.Next(0, ReactorModManager.Instance.VanillaReactorMaxType + PulsarModLoader.Content.Components.Reactor.ReactorModManager.Instance.ReactorTypes.Count);
             }
             if (!Configs.bossitem && (value == 9 || value == 15))
             {
@@ -62,10 +71,10 @@ namespace Randomizer
         public static int Jump(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EWarpDriveType)).Length + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.VanillaWarpDriveMaxType + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
             while (value == 4 || value == 16)
             {
-                value = random.Next(0, Enum.GetNames(typeof(EWarpDriveType)).Length + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.VanillaWarpDriveMaxType + PulsarModLoader.Content.Components.WarpDrive.WarpDriveModManager.Instance.WarpDriveTypes.Count);
             }
             return value;
         }
@@ -73,10 +82,10 @@ namespace Randomizer
         {
             bool exotic = PulsarModLoader.ModManager.Instance.GetMod("Exotic Components") != null;
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EThrusterType)).Length + PulsarModLoader.Content.Components.Thruster.ThrusterModManager.Instance.ThrusterTypes.Count);
+            int value = random.Next(0, ThrusterModManager.Instance.VanillaThrusterMaxType + PulsarModLoader.Content.Components.Thruster.ThrusterModManager.Instance.ThrusterTypes.Count);
             while (exotic && value == ThrusterModManager.Instance.GetThrusterIDFromName("Flagship Thruster"))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EThrusterType)).Length + PulsarModLoader.Content.Components.Thruster.ThrusterModManager.Instance.ThrusterTypes.Count);
+                value = random.Next(0, ThrusterModManager.Instance.VanillaThrusterMaxType + PulsarModLoader.Content.Components.Thruster.ThrusterModManager.Instance.ThrusterTypes.Count);
             }
             return value;
         }
@@ -84,14 +93,14 @@ namespace Randomizer
         {
             bool exotic = PulsarModLoader.ModManager.Instance.GetMod("Exotic Components") != null;
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EInertiaThrusterType)).Length + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
+            int value = random.Next(0, InertiaThrusterModManager.Instance.VanillaInertiaThrusterMaxType + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
             while (value == 1 || (exotic && value == InertiaThrusterModManager.Instance.GetInertiaThrusterIDFromName("Flagship Inertia Thruster")))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EInertiaThrusterType)).Length + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
+                value = random.Next(0, InertiaThrusterModManager.Instance.VanillaInertiaThrusterMaxType + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
             }
             while (!Configs.bossitem && (value == 2 || value == 3))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EInertiaThrusterType)).Length + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
+                value = random.Next(0, InertiaThrusterModManager.Instance.VanillaInertiaThrusterMaxType + PulsarModLoader.Content.Components.InertiaThruster.InertiaThrusterModManager.Instance.InertiaThrusterTypes.Count);
             }
             return value;
         }
@@ -99,40 +108,40 @@ namespace Randomizer
         {
             bool exotic = PulsarModLoader.ModManager.Instance.GetMod("Exotic Components") != null;
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EManeuverThrusterType)).Length + PulsarModLoader.Content.Components.ManeuverThruster.ManeuverThrusterModManager.Instance.ManeuverThrusterTypes.Count);
+            int value = random.Next(0, ManeuverThrusterModManager.Instance.VanillaManeuverThrusterMaxType + PulsarModLoader.Content.Components.ManeuverThruster.ManeuverThrusterModManager.Instance.ManeuverThrusterTypes.Count);
             while (exotic && value == ManeuverThrusterModManager.Instance.GetManeuverThrusterIDFromName("Flagship Maneuvering Thruster"))
             {
-                value = random.Next(0, Enum.GetNames(typeof(EManeuverThrusterType)).Length + PulsarModLoader.Content.Components.ManeuverThruster.ManeuverThrusterModManager.Instance.ManeuverThrusterTypes.Count);
+                value = random.Next(0, ManeuverThrusterModManager.Instance.VanillaManeuverThrusterMaxType + ManeuverThrusterModManager.Instance.ManeuverThrusterTypes.Count);
             }
             return value;
         }
         public static int Chair(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(ECaptainsChairType)).Length + PulsarModLoader.Content.Components.CaptainsChair.CaptainsChairModManager.Instance.CaptainsChairTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.CaptainsChair.CaptainsChairModManager.Instance.VanillaCaptainsChairMaxType + PulsarModLoader.Content.Components.CaptainsChair.CaptainsChairModManager.Instance.CaptainsChairTypes.Count);
             return value;
         }
         public static int Extractor(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EExtractorType)).Length + PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.ExtractorTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.VanillaExtractorMaxType + PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.ExtractorTypes.Count);
             while (value == 2)
             {
-                value = random.Next(0, Enum.GetNames(typeof(EExtractorType)).Length + PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.ExtractorTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.VanillaExtractorMaxType + PulsarModLoader.Content.Components.Extractor.ExtractorModManager.Instance.ExtractorTypes.Count);
             }
             return value;
         }
         public static int Turret(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.VanillaTurretMaxType + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             while (value == 5)
             {
-                value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.VanillaTurretMaxType + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             }
             while (!Configs.bossitem && (value == 7 || value == 8 || value == 18))
             {
-                value = random.Next(0, Enum.GetNames(typeof(ETurretType)).Length + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.VanillaTurretMaxType + PulsarModLoader.Content.Components.Turret.TurretModManager.Instance.TurretTypes.Count);
             }
             return value;
         }
@@ -157,14 +166,14 @@ namespace Randomizer
         public static int Missile(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.VanillaMissileMaxType + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             while (value == 3 || value == 11)
             {
-                value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.VanillaMissileMaxType + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             }
             while (!Configs.bossitem && (value == 5))
             {
-                value = random.Next(0, Enum.GetNames(typeof(ETrackerMissileType)).Length + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.VanillaMissileMaxType + PulsarModLoader.Content.Components.Missile.MissileModManager.Instance.MissileTypes.Count);
             }
             return value;
         }
@@ -177,33 +186,33 @@ namespace Randomizer
         public static int Processor(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(1, Enum.GetNames(typeof(ECPUClass)).Length + PulsarModLoader.Content.Components.CPU.CPUModManager.Instance.CPUTypes.Count);
+            int value = random.Next(1, PulsarModLoader.Content.Components.CPU.CPUModManager.Instance.VanillaCPUMaxType + PulsarModLoader.Content.Components.CPU.CPUModManager.Instance.CPUTypes.Count);
             return value;
         }
         public static int Program(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EWarpDriveProgramType)).Length + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.VanillaWarpDriveProgramMaxType + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
             while (value == 8)
             {
-                value = random.Next(0, Enum.GetNames(typeof(EWarpDriveProgramType)).Length + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.VanillaWarpDriveProgramMaxType + PulsarModLoader.Content.Components.WarpDriveProgram.WarpDriveProgramModManager.Instance.WarpDriveProgramTypes.Count);
             }
             return value;
         }
         public static int Nuclear(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(ENuclearDeviceType)).Length + PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.NuclearDeviceTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.VanillaNuclearDeviceMaxType + PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.NuclearDeviceTypes.Count);
             while (value == 3)
             {
-                value = random.Next(0, Enum.GetNames(typeof(ENuclearDeviceType)).Length + PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.NuclearDeviceTypes.Count);
+                value = random.Next(0, PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.VanillaNuclearDeviceMaxType + PulsarModLoader.Content.Components.NuclearDevice.NuclearDeviceModManager.Instance.NuclearDeviceTypes.Count);
             }
             return value;
         }
         public static int Polytech(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EPolytechModuleType)).Length + PulsarModLoader.Content.Components.PolytechModule.PolytechModuleModManager.Instance.PolytechModuleTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.PolytechModule.PolytechModuleModManager.Instance.VanillaPolytechModuleMaxType + PulsarModLoader.Content.Components.PolytechModule.PolytechModuleModManager.Instance.PolytechModuleTypes.Count);
             return value;
         }
         public static int SOS(int seed = 1)
@@ -228,14 +237,14 @@ namespace Randomizer
         public static int AutoTurret(int seed = 1) 
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EAutoTurretType)).Length + PulsarModLoader.Content.Components.AutoTurret.AutoTurretModManager.Instance.AutoTurretTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.AutoTurret.AutoTurretModManager.Instance.VanillaAutoTurretMaxType + PulsarModLoader.Content.Components.AutoTurret.AutoTurretModManager.Instance.AutoTurretTypes.Count);
             return value;
         }
 
         public static int HullPlating(int seed = 1)
         {
             System.Random random = new System.Random(RandomSeed() * seed);
-            int value = random.Next(0, Enum.GetNames(typeof(EHullPlatingType)).Length + PulsarModLoader.Content.Components.HullPlating.HullPlatingModManager.Instance.HullPlatingTypes.Count);
+            int value = random.Next(0, PulsarModLoader.Content.Components.HullPlating.HullPlatingModManager.Instance.VanillaHullPlatingMaxType + PulsarModLoader.Content.Components.HullPlating.HullPlatingModManager.Instance.HullPlatingTypes.Count);
             return value;
         }
 
@@ -366,8 +375,60 @@ namespace Randomizer
             }
             return component;
         }
-
-
+        public static int GeneralRandomComp(int type, int seed) 
+        {
+            switch (type) 
+            {
+                default:
+                    return 0;
+                case 1:
+                    return Shield(seed);
+                case 2:
+                    return Jump(seed);
+                case 3:
+                    return Reactor(seed);
+                case 6:
+                    return Hull(seed);
+                case 7:
+                    return Processor(seed);
+                case 8:
+                    return O2(seed);
+                case 9:
+                    return Thruster(seed);
+                case 10:
+                    return Turret(seed);
+                case 11:
+                    return MainTurret(seed);
+                case 16:
+                    return HullPlating(seed);
+                case 17:
+                    return Program(seed);
+                case 19:
+                    return Nuclear(seed);
+                case 20:
+                    return Missile(seed);
+                case 22:
+                    return SOS(seed);
+                case 23:
+                    return Mission(seed);
+                case 24:
+                    return AutoTurret(seed);
+                case 25:
+                    return Inertia(seed);
+                case 26:
+                    return Maneuver(seed);
+                case 27:
+                    return Chair(seed);
+                case 28:
+                    return Extractor(seed);
+                case 30:
+                    return Recipe(seed);
+                case 33:
+                    return Cloak(seed);
+                case 34:
+                    return Polytech(seed);
+            }
+        }
     }
 
 }
